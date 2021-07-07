@@ -170,24 +170,45 @@ export default {
   },
   methods: {
     async showme() {
-      /*  if(this.nuevoDiagnostico.patologia && this.nuevoDiagnostico.estadoDeSalud) {
-        this.nuevoDiagnostico.id_consulta = this.data.consulta[0].id_consulta;
-      } */
-      this.nuevoTratamiento.fecha_inicio = this.fecha_inicio;
-      this.nuevoTratamiento.fecha_fin = this.fecha_fin;
-      this.nuevoTratamiento.id_diagnostico = this.data.diagnostico.id_diagnosticos;
-      var res = await axios.get("/getmed", { params: {nombre: this.nuevoTratamiento.medico}});
-      this.nuevoTratamiento.id_medico = res.data;
-      console.log(this.nuevoTratamiento);
-      await axios.post("/tratamientos", this.nuevoTratamiento);
-      this.close('Modal closed');
-      this.$toast('Nuevo Tratamiento Guardado Exitosamente!');
-      /* if (!this.nuevoDiagnostico.patologia) {
-        this.errors.push('La patologia es obligatorio.');
+      if (
+        this.nuevoTratamiento.nombre_tratamiento &&
+        this.nuevoTratamiento.medico &&
+        this.fecha_inicio &&
+        this.fecha_fin &&
+        this.nuevoTratamiento.objetivo &&
+        this.nuevoTratamiento.riesgos
+      ) {
+        this.nuevoTratamiento.fecha_inicio = this.fecha_inicio;
+        this.nuevoTratamiento.fecha_fin = this.fecha_fin;
+        this.nuevoTratamiento.id_diagnostico =
+          this.data.diagnostico.id_diagnosticos;
+        var res = await axios.get("/getmed", {
+          params: { nombre: this.nuevoTratamiento.medico },
+        });
+        this.nuevoTratamiento.id_medico = res.data;
+        console.log(this.nuevoTratamiento);
+        await axios.post("/tratamientos", this.nuevoTratamiento);
+        this.close("Modal closed");
+        this.$toast("Nuevo Tratamiento Guardado Exitosamente!");
       }
-      if (!this.nuevoDiagnostico.estadoDeSalud) {
-        this.errors.push('El estado de salud es obligatorio.');
-      } */
+      if (!this.nuevoTratamiento.nombre_tratamiento) {
+        this.$toast.error('El Tipo de Tratamiento es obligatorio.');
+      }
+      if (!this.nuevoTratamiento.medico) {
+        this.$toast.error('El medico para el tratamiento es obligatorio.');
+      }
+      if(!this.fecha_inicio) {
+        this.$toast.error('La fecha de inicio del tratamiento es obligatoria.');
+      }
+      if(!this.fecha_fin) {
+        this.$toast.error('La fecha final del tratamiento es obligatoria.');
+      }
+      if (!this.nuevoTratamiento.objetivo) {
+        this.$toast.error('El objetivo del tratamiento es obligatorio.');
+      }
+      if (!this.nuevoTratamiento.riesgos) {
+        this.$toast.error('Los posibles riesgos del tratamiento son obligatorios.')
+      }
     },
     fechainicio() {
       return new Date(moment(this.fecha_inicio).toDate());

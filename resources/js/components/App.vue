@@ -14,6 +14,7 @@
       <Tab :isSelected="selected === 'Pacientes'">
         <p></p>
         <h1>Buscar Paciente</h1>
+        <p>Para ver mas informacion del paciente que desea presione doble click sobre su nombre.</p>
         <div>
           <input
             type="text"
@@ -47,6 +48,7 @@
               class="tr-anim"
               :key="persona.id_persona"
               @click="selectRow(persona)"
+              @dblclick="addModal"
               :class="{ highlight: persona.id_persona == selectedUser }"
             >
               <td>P_{{ persona.id_persona }}</td>
@@ -105,6 +107,8 @@
               v-bind:style="{ '--index': index }"
               class="tr-anim"
               :key="consulta.id_consulta"
+              :ref="'ref_' + index"
+              @mouseover="divDragOver($event, index)"
               @click="selectRowConsulta(consulta)"
               :class="{ highlightCons: consulta.id_consulta == selectedCons }"
             >
@@ -120,9 +124,11 @@
         <!-- ------------------------------ -->
         <!-- End of the table -->
 
-        <button @click="nuevaConsulta" class="btn btn-primary">
-          Nueva Consulta
-        </button>
+        <div class="trslt-btn" :style="{ top: 300+top+'px' }">
+          <button @click="nuevaConsulta" class="btn btn-primary">
+            Nueva Consulta
+          </button>
+        </div>
         <button @click="verConsulta" type="button" class="btn btn-primary my-4">
           Ver Consulta
         </button>
@@ -518,6 +524,8 @@ export default {
 
       modal: 0,
       verPer: 0,
+      top: 0,
+      left: 0,
 
       personas: [],
       selectedUser: null,
@@ -541,7 +549,16 @@ export default {
     };
   },
   methods: {
+    divDragOver(e, i) {
+      let [div] = this.$refs["ref_" + i];
+      let top = div.getBoundingClientRect().top;
+      this.top = top;
+      console.log(this.top);
+    },
     async selectRowConsulta(consulta) {
+      /* some styling positions */
+      console.log(this.top);
+      /* ////////////////////// */
       this.selectedCons = consulta.id_consulta;
       const resCons = await axios.get("/consultas", {
         params: { selectedCons: this.selectedCons },
@@ -915,30 +932,52 @@ tr:hover {
 }
 
 @keyframes slideInFromLeft {
-      0% {
-        transform: translateX(-200%);
-        opacity: 0%;
-      }
-      100% {
-        transform: translateX(0);
-        opacity: 100%;
-      }
-    }
-
-.tr-anim{
-    --index: 0;
-    opacity: 0;
-    -webkit-transition: opacity 1s;
-    transition: opacity 1s;
-    /* /////////ANIMATIONS///////////// */
-    animation-duration: 1s;
-    animation-timing-function: ease-out;
-    animation-delay: calc(0.07s * var(--index));
-    animation-iteration-count: 1;
-    animation-name: slideInFromLeft;
-    animation-fill-mode: forwards;
-    /* /////////ANIMATIONS///////////// */
+  0% {
+    transform: translateX(-200%);
+    opacity: 0%;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 100%;
+  }
 }
 
-
+.tr-anim {
+  --index: 0;
+  opacity: 0;
+  -webkit-transition: opacity 1s;
+  transition: opacity 1s;
+  /* /////////ANIMATIONS///////////// */
+  animation-duration: 1s;
+  animation-timing-function: ease-out;
+  animation-delay: calc(0.07s * var(--index));
+  animation-iteration-count: 1;
+  animation-name: slideInFromLeft;
+  animation-fill-mode: forwards;
+  /* /////////ANIMATIONS///////////// */
+}
+.trslt-btn {
+  --pos: 16.66015625;
+  /* /////////ANIMATIONS///////////// */
+  top: (var(--pos));
+  transform: scale(calc(var(--pos) * 0.01));
+  position: absolute;
+  animation-duration: 1s;
+  animation-timing-function: ease-out;
+  animation-delay: 0.07s;
+  animation-iteration-count: 99;
+  animation-name: slide;
+  /* /////////ANIMATIONS///////////// */
+}
+[data-animation] {
+  animation: var(--pos);
+}
+@keyframes slide {
+  from {
+    transform: translateY(0%);
+  }
+  to {
+    transform: translateY(var(--pos));
+  }
+}
 </style>

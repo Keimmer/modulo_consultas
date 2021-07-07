@@ -1884,6 +1884,24 @@ function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -2402,6 +2420,8 @@ Vue.use(vue_toastification__WEBPACK_IMPORTED_MODULE_19__.default, options);
       vista: 0,
       modal: 0,
       verPer: 0,
+      top: 0,
+      left: 0,
       personas: [],
       selectedUser: null,
       consultas: [],
@@ -2424,6 +2444,14 @@ Vue.use(vue_toastification__WEBPACK_IMPORTED_MODULE_19__.default, options);
     };
   },
   methods: {
+    divDragOver: function divDragOver(e, i) {
+      var _this$$refs = _slicedToArray(this.$refs["ref_" + i], 1),
+          div = _this$$refs[0];
+
+      var top = div.getBoundingClientRect().top;
+      this.top = top;
+      console.log(this.top);
+    },
     selectRowConsulta: function selectRowConsulta(consulta) {
       var _this = this;
 
@@ -2433,20 +2461,24 @@ Vue.use(vue_toastification__WEBPACK_IMPORTED_MODULE_19__.default, options);
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
+                /* some styling positions */
+                console.log(_this.top);
+                /* ////////////////////// */
+
                 _this.selectedCons = consulta.id_consulta;
-                _context.next = 3;
+                _context.next = 4;
                 return axios.get("/consultas", {
                   params: {
                     selectedCons: _this.selectedCons
                   }
                 });
 
-              case 3:
+              case 4:
                 resCons = _context.sent;
                 _this.consulta = resCons.data;
                 console.log(_this.consulta);
 
-              case 6:
+              case 7:
               case "end":
                 return _context.stop();
             }
@@ -5066,39 +5098,59 @@ Vue.use(vue_toastification__WEBPACK_IMPORTED_MODULE_10__.default, options);
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                /*  if(this.nuevoDiagnostico.patologia && this.nuevoDiagnostico.estadoDeSalud) {
-                  this.nuevoDiagnostico.id_consulta = this.data.consulta[0].id_consulta;
-                } */
+                if (!(_this.nuevoTratamiento.nombre_tratamiento && _this.nuevoTratamiento.medico && _this.fecha_inicio && _this.fecha_fin && _this.nuevoTratamiento.objetivo && _this.nuevoTratamiento.riesgos)) {
+                  _context.next = 13;
+                  break;
+                }
+
                 _this.nuevoTratamiento.fecha_inicio = _this.fecha_inicio;
                 _this.nuevoTratamiento.fecha_fin = _this.fecha_fin;
                 _this.nuevoTratamiento.id_diagnostico = _this.data.diagnostico.id_diagnosticos;
-                _context.next = 5;
+                _context.next = 6;
                 return axios.get("/getmed", {
                   params: {
                     nombre: _this.nuevoTratamiento.medico
                   }
                 });
 
-              case 5:
+              case 6:
                 res = _context.sent;
                 _this.nuevoTratamiento.id_medico = res.data;
                 console.log(_this.nuevoTratamiento);
-                _context.next = 10;
+                _context.next = 11;
                 return axios.post("/tratamientos", _this.nuevoTratamiento);
 
-              case 10:
-                _this.close('Modal closed');
+              case 11:
+                _this.close("Modal closed");
 
-                _this.$toast('Nuevo Tratamiento Guardado Exitosamente!');
-                /* if (!this.nuevoDiagnostico.patologia) {
-                  this.errors.push('La patologia es obligatorio.');
+                _this.$toast("Nuevo Tratamiento Guardado Exitosamente!");
+
+              case 13:
+                if (!_this.nuevoTratamiento.nombre_tratamiento) {
+                  _this.$toast.error('El Tipo de Tratamiento es obligatorio.');
                 }
-                if (!this.nuevoDiagnostico.estadoDeSalud) {
-                  this.errors.push('El estado de salud es obligatorio.');
-                } */
 
+                if (!_this.nuevoTratamiento.medico) {
+                  _this.$toast.error('El medico para el tratamiento es obligatorio.');
+                }
 
-              case 12:
+                if (!_this.fecha_inicio) {
+                  _this.$toast.error('La fecha de inicio del tratamiento es obligatoria.');
+                }
+
+                if (!_this.fecha_fin) {
+                  _this.$toast.error('La fecha final del tratamiento es obligatoria.');
+                }
+
+                if (!_this.nuevoTratamiento.objetivo) {
+                  _this.$toast.error('El objetivo del tratamiento es obligatorio.');
+                }
+
+                if (!_this.nuevoTratamiento.riesgos) {
+                  _this.$toast.error('Los posibles riesgos del tratamiento son obligatorios.');
+                }
+
+              case 19:
               case "end":
                 return _context.stop();
             }
@@ -10693,7 +10745,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n#appx {\r\n  font-family: Avenir, Helvetica, Arial, sans-serif;\r\n  -webkit-font-smoothing: antialiased;\r\n  -moz-osx-font-smoothing: grayscale;\r\n  color: #2c3e50;\r\n  margin-top: 60px;\r\n  display: flex;\r\n  flex-direction: row;\r\n  justify-content: center;\n}\n.mostrar {\r\n  display: list-item;\r\n  opacity: 1;\r\n  background: rgba(75, 56, 143, 0.705);\n}\n.highlight {\r\n  background-color: rgb(79, 139, 196);\r\n  color: white;\n}\n.highlightCons {\r\n  background-color: rgb(79, 139, 196);\r\n  color: white;\n}\n.highlightDiag {\r\n  background-color: rgb(79, 139, 196);\r\n  color: white;\n}\n.highlightTrat {\r\n  background-color: rgb(79, 139, 196);\r\n  color: white;\n}\n.highlightRecipe {\r\n  background-color: rgb(79, 139, 196);\r\n  color: white;\n}\ntr:hover {\r\n  cursor: pointer;\r\n  background-color: rgb(159, 213, 255);\r\n  transition: 0.1s;\n}\n@-webkit-keyframes slideInFromLeft {\n0% {\r\n        transform: translateX(-200%);\r\n        opacity: 0%;\n}\n100% {\r\n        transform: translateX(0);\r\n        opacity: 100%;\n}\n}\n@keyframes slideInFromLeft {\n0% {\r\n        transform: translateX(-200%);\r\n        opacity: 0%;\n}\n100% {\r\n        transform: translateX(0);\r\n        opacity: 100%;\n}\n}\n.tr-anim{\r\n    --index: 0;\r\n    opacity: 0;\r\n    transition: opacity 1s;\r\n    /* /////////ANIMATIONS///////////// */\r\n    -webkit-animation-duration: 1s;\r\n            animation-duration: 1s;\r\n    -webkit-animation-timing-function: ease-out;\r\n            animation-timing-function: ease-out;\r\n    -webkit-animation-delay: calc(0.07s * var(--index));\r\n            animation-delay: calc(0.07s * var(--index));\r\n    -webkit-animation-iteration-count: 1;\r\n            animation-iteration-count: 1;\r\n    -webkit-animation-name: slideInFromLeft;\r\n            animation-name: slideInFromLeft;\r\n    -webkit-animation-fill-mode: forwards;\r\n            animation-fill-mode: forwards;\r\n    /* /////////ANIMATIONS///////////// */\n}\r\n\r\n\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n#appx {\r\n  font-family: Avenir, Helvetica, Arial, sans-serif;\r\n  -webkit-font-smoothing: antialiased;\r\n  -moz-osx-font-smoothing: grayscale;\r\n  color: #2c3e50;\r\n  margin-top: 60px;\r\n  display: flex;\r\n  flex-direction: row;\r\n  justify-content: center;\n}\n.mostrar {\r\n  display: list-item;\r\n  opacity: 1;\r\n  background: rgba(75, 56, 143, 0.705);\n}\n.highlight {\r\n  background-color: rgb(79, 139, 196);\r\n  color: white;\n}\n.highlightCons {\r\n  background-color: rgb(79, 139, 196);\r\n  color: white;\n}\n.highlightDiag {\r\n  background-color: rgb(79, 139, 196);\r\n  color: white;\n}\n.highlightTrat {\r\n  background-color: rgb(79, 139, 196);\r\n  color: white;\n}\n.highlightRecipe {\r\n  background-color: rgb(79, 139, 196);\r\n  color: white;\n}\ntr:hover {\r\n  cursor: pointer;\r\n  background-color: rgb(159, 213, 255);\r\n  transition: 0.1s;\n}\n@-webkit-keyframes slideInFromLeft {\n0% {\r\n    transform: translateX(-200%);\r\n    opacity: 0%;\n}\n100% {\r\n    transform: translateX(0);\r\n    opacity: 100%;\n}\n}\n@keyframes slideInFromLeft {\n0% {\r\n    transform: translateX(-200%);\r\n    opacity: 0%;\n}\n100% {\r\n    transform: translateX(0);\r\n    opacity: 100%;\n}\n}\n.tr-anim {\r\n  --index: 0;\r\n  opacity: 0;\r\n  transition: opacity 1s;\r\n  /* /////////ANIMATIONS///////////// */\r\n  -webkit-animation-duration: 1s;\r\n          animation-duration: 1s;\r\n  -webkit-animation-timing-function: ease-out;\r\n          animation-timing-function: ease-out;\r\n  -webkit-animation-delay: calc(0.07s * var(--index));\r\n          animation-delay: calc(0.07s * var(--index));\r\n  -webkit-animation-iteration-count: 1;\r\n          animation-iteration-count: 1;\r\n  -webkit-animation-name: slideInFromLeft;\r\n          animation-name: slideInFromLeft;\r\n  -webkit-animation-fill-mode: forwards;\r\n          animation-fill-mode: forwards;\r\n  /* /////////ANIMATIONS///////////// */\n}\n.trslt-btn {\r\n  --pos: 16.66015625;\r\n  /* /////////ANIMATIONS///////////// */\r\n  top: (var(--pos));\r\n  transform: scale(calc(var(--pos) * 0.01));\r\n  position: absolute;\r\n  -webkit-animation-duration: 1s;\r\n          animation-duration: 1s;\r\n  -webkit-animation-timing-function: ease-out;\r\n          animation-timing-function: ease-out;\r\n  -webkit-animation-delay: 0.07s;\r\n          animation-delay: 0.07s;\r\n  -webkit-animation-iteration-count: 99;\r\n          animation-iteration-count: 99;\r\n  -webkit-animation-name: slide;\r\n          animation-name: slide;\r\n  /* /////////ANIMATIONS///////////// */\n}\n[data-animation] {\r\n  -webkit-animation: var(--pos);\r\n          animation: var(--pos);\n}\n@-webkit-keyframes slide {\nfrom {\r\n    transform: translateY(0%);\n}\nto {\r\n    transform: translateY(var(--pos));\n}\n}\n@keyframes slide {\nfrom {\r\n    transform: translateY(0%);\n}\nto {\r\n    transform: translateY(var(--pos));\n}\n}\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -68163,6 +68215,12 @@ var render = function() {
             _vm._v(" "),
             _c("h1", [_vm._v("Buscar Paciente")]),
             _vm._v(" "),
+            _c("p", [
+              _vm._v(
+                "Para ver mas informacion del paciente que desea presione doble click sobre su nombre."
+              )
+            ]),
+            _vm._v(" "),
             _c("div", [
               _c("input", {
                 directives: [
@@ -68226,7 +68284,8 @@ var render = function() {
                       on: {
                         click: function($event) {
                           return _vm.selectRow(persona)
-                        }
+                        },
+                        dblclick: _vm.addModal
                       }
                     },
                     [
@@ -68323,6 +68382,8 @@ var render = function() {
                         "tr",
                         {
                           key: consulta.id_consulta,
+                          ref: "ref_" + index,
+                          refInFor: true,
                           staticClass: "tr-anim",
                           class: {
                             highlightCons:
@@ -68330,6 +68391,9 @@ var render = function() {
                           },
                           style: { "--index": index },
                           on: {
+                            mouseover: function($event) {
+                              return _vm.divDragOver($event, index)
+                            },
                             click: function($event) {
                               return _vm.selectRowConsulta(consulta)
                             }
@@ -68368,12 +68432,21 @@ var render = function() {
               : _vm._e(),
             _vm._v(" "),
             _c(
-              "button",
+              "div",
               {
-                staticClass: "btn btn-primary",
-                on: { click: _vm.nuevaConsulta }
+                staticClass: "trslt-btn",
+                style: { top: 300 + _vm.top + "px" }
               },
-              [_vm._v("\n        Nueva Consulta\n      ")]
+              [
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-primary",
+                    on: { click: _vm.nuevaConsulta }
+                  },
+                  [_vm._v("\n          Nueva Consulta\n        ")]
+                )
+              ]
             ),
             _vm._v(" "),
             _c(
