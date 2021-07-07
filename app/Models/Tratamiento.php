@@ -7,8 +7,12 @@ use Illuminate\Database\Eloquent\Model;
 /**
  * @property int $id_tratamientos
  * @property int $id_tipo_tratamiento
+ * @property int $id_medico
  * @property string $fecha_inicio
  * @property string $fecha_fin
+ * @property string $objetivo
+ * @property string $riesgos
+ * @property Persona $persona
  * @property TblTipoTratamiento $tblTipoTratamiento
  * @property TblRecipesTratamiento[] $tblRecipesTratamientos
  * @property TblTratamientoDiagnostico[] $tblTratamientoDiagnosticos
@@ -22,6 +26,8 @@ class Tratamiento extends Model
      */
     protected $table = 'tbl_tratamiento';
 
+    public $timestamps = false;
+
     /**
      * The primary key for the model.
      * 
@@ -32,7 +38,15 @@ class Tratamiento extends Model
     /**
      * @var array
      */
-    protected $fillable = ['id_tipo_tratamiento', 'fecha_inicio', 'fecha_fin'];
+    protected $fillable = ['id_tipo_tratamiento', 'id_medico', 'fecha_inicio', 'fecha_fin', 'objetivo', 'riesgos'];
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function persona()
+    {
+        return $this->belongsTo('App\Persona', 'id_medico', 'id_persona');
+    }
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo

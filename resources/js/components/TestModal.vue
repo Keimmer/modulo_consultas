@@ -1,7 +1,7 @@
 <template>
   <Modal>
     <ModalHeader>
-      <h3>Detalles Paciente N°{{data.id_persona}} :</h3>
+      <h3>Detalles Paciente N°: P_{{data.id_persona}}</h3>
     </ModalHeader>
     <ModalBody>
       <h4>Nombres y Apellidos:</h4>
@@ -16,7 +16,6 @@
       <p>{{data.telefono}}</p>
       <h4>Dirección:</h4>
       <p>{{data.direccion}}</p>
-      <h4>Antecedentes Personales</h4>
       
     </ModalBody>
     <ModalFooter>

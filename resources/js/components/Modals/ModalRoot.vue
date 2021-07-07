@@ -40,7 +40,22 @@ export default {
     });
     ModalService.$on('send', ({ data }) => {
       this.modal.props = { data }
-    })
+    });
+    ModalService.$on('especialidades', ({ especialidades }) => {
+      this.modal.props.especialidades = { especialidades }
+    });
+    ModalService.$on('sintomas', ({ sintomas }) => {
+      this.modal.props.sintomasArr = { sintomas }
+    });
+    ModalService.$on('habitos', ({ habitos }) => {
+      this.modal.props.habitosArr = { habitos }
+    });
+    ModalService.$on('procesos', ({ procesos }) => {
+      this.modal.props.procesosArr = { procesos }
+    });
+    ModalService.$on('consultas', ({ consultas }) => {
+      this.modal.props = { consultas }
+    });
   }
 }
 </script>

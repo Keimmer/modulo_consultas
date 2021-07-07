@@ -5,11 +5,9 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * @property int $id_recipes
- * @property int $id_tipo_medicamento
- * @property string $indicaciones
+ * @property int $id_recipe
  * @property string $fecha_expedicion
- * @property TblTipoMedicamento $tblTipoMedicamento
+ * @property TblMediacamentosRecipe[] $tblMediacamentosRecipes
  * @property TblRecipesTratamiento[] $tblRecipesTratamientos
  */
 class Recipe extends Model
@@ -26,19 +24,19 @@ class Recipe extends Model
      * 
      * @var string
      */
-    protected $primaryKey = 'id_recipes';
+    protected $primaryKey = 'id_recipe';
 
     /**
      * @var array
      */
-    protected $fillable = ['id_tipo_medicamento', 'indicaciones', 'fecha_expedicion'];
+    protected $fillable = ['fecha_expedicion'];
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function tblTipoMedicamento()
+    public function tblMediacamentosRecipes()
     {
-        return $this->belongsTo('App\TblTipoMedicamento', 'id_tipo_medicamento', 'id_tipo_medicamento');
+        return $this->hasMany('App\TblMediacamentosRecipe', 'id_recipes', 'id_recipe');
     }
 
     /**
@@ -46,6 +44,6 @@ class Recipe extends Model
      */
     public function tblRecipesTratamientos()
     {
-        return $this->hasMany('App\TblRecipesTratamiento', 'id_recipes', 'id_recipes');
+        return $this->hasMany('App\TblRecipesTratamiento', 'id_recipe', 'id_recipe');
     }
 }

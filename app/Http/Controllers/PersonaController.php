@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Persona;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 
 class PersonaController extends Controller
 {
@@ -16,23 +17,41 @@ class PersonaController extends Controller
     public function index(Request $request)
     {
         if($request->cedula){
-            return Persona::where('cedula', 'like', '%'. $request->cedula.'%')->get();
+            return Persona::select(
+                'persona.id_persona',
+                'persona.nombre',
+                'persona.apellido',
+                'persona.cedula',
+                'persona.direccion',
+                'persona.telefono',
+                Persona::raw('YEAR(CURDATE()) - YEAR(fecha_nacimiento) AS edad'),
+                'generos.nombre_genero AS genero')
+                ->join('generos', 'persona.id_genero', '=', 'generos.idgenero')
+                ->where('persona.roles_id', '=', '2')
+                ->where('cedula', 'like', '%'. $request->cedula.'%')
+                ->get();
 
         }
 
-        return Persona::select('persona.id_persona',
-         'persona.nombre',
-        'persona.apellido',
-        'persona.cedula',
-        'persona.direccion',
-        'persona.telefono',
-        Persona::raw('YEAR(CURDATE()) - YEAR(fecha_nacimiento) AS edad'),
-        'generos.nombre_genero AS genero')
-        ->join('generos', 'persona.id_genero', '=', 'generos.idgenero')
-        ->where('persona.roles_id', '=', '2')
-        ->get();
+        return Persona::select(
+            'persona.id_persona',
+            'persona.nombre',
+            'persona.apellido',
+            'persona.cedula',
+            'persona.direccion',
+            'persona.telefono',
+            Persona::raw('YEAR(CURDATE()) - YEAR(fecha_nacimiento) AS edad'),
+            'generos.nombre_genero AS genero')
+            ->join('generos', 'persona.id_genero', '=', 'generos.idgenero')
+            ->where('persona.roles_id', '=', '2')
+            ->get();
     }
 
+    public function getMedicos(Request $request) {
+        $name = explode(' ', $request->nombre);
+        Log::info($name[0]);
+        return Persona::where('persona.nombre', 'LIKE', '%'.$name[0].'%')->first()->id_persona;
+    }
     /**
      * Store a newly created resource in storage.
      *

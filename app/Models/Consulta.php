@@ -10,18 +10,16 @@ use Illuminate\Database\Eloquent\Model;
  * @property int $id_especialidad
  * @property int $id_resultados_examen
  * @property string $fecha_consulta
- * @property string $sintomas
- * @property string $habitos
- * @property string $alergias
- * @property string $estado
  * @property Persona $persona
  * @property TblEspecialidad $tblEspecialidad
  * @property TblResultadosExamene $tblResultadosExamene
  * @property ProcedimientoMedicoXConsultum[] $procedimientoMedicoXConsultas
  * @property TblDiagnosticosConsultum[] $tblDiagnosticosConsultas
+ * @property TblHabitosConsultum[] $tblHabitosConsultas
  * @property TblHistorium[] $tblHistorias
+ * @property TblSintomasConsultum[] $tblSintomasConsultas
  */
-class Consultas extends Model
+class Consulta extends Model
 {
     /**
      * The table associated with the model.
@@ -40,7 +38,7 @@ class Consultas extends Model
     /**
      * @var array
      */
-    protected $fillable = ['id_medico', 'id_especialidad', 'id_resultados_examen', 'fecha_consulta', 'sintomas', 'habitos', 'alergias', 'estado'];
+    protected $fillable = ['id_medico', 'id_especialidad', 'id_resultados_examen', 'fecha_consulta'];
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
@@ -85,8 +83,24 @@ class Consultas extends Model
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
+    public function tblHabitosConsultas()
+    {
+        return $this->hasMany('App\TblHabitosConsultum', 'id_consulta', 'id_consulta');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
     public function tblHistorias()
     {
-        return $this->hasMany('App\TblHistorium', 'id_motivo', 'id_consulta');
+        return $this->hasMany('App\TblHistorium', 'id_consulta', 'id_consulta');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function tblSintomasConsultas()
+    {
+        return $this->hasMany('App\TblSintomasConsultum', 'id_consulta', 'id_consulta');
     }
 }

@@ -23,5 +23,13 @@
         "vue": "^2.5.17",
         "vue-loader": "^15.9.5",
         "vue-template-compiler": "^2.6.10"
+    },
+    "dependencies": {
+        "luxon": "^1.27.0",
+        "moment": "^2.29.1",
+        "mosha-vue-toastify": "^1.0.13",
+        "vue-luxon": "^0.10.0",
+        "vue-toastification": "^1.7.11",
+        "vuejs-datepicker": "^1.6.2"
     }
 }

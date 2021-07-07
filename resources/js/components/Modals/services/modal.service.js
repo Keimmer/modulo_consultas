@@ -8,6 +8,21 @@ export default new Vue({
     },
     recievedata(data){
       this.$emit('send', { data });
-    }
+    },
+    recieveEspecialidad(especialidades){
+      this.$emit('especialidades', { especialidades });
+    },
+    recieveSintomas(sintomas){
+      this.$emit('sintomas', { sintomas });
+    },
+    recieveHabitos(habitos){
+      this.$emit('habitos', { habitos });
+    },
+    recieveProcesos(procesos){
+      this.$emit('procesos', { procesos });
+    },
+    recieveCons(consultas){
+      this.$emit('consultas', { consultas });
+    },
   }
 })

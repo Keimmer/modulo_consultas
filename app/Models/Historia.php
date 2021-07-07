@@ -7,15 +7,13 @@ use Illuminate\Database\Eloquent\Model;
 /**
  * @property int $id_historia
  * @property int $id_paciente
- * @property int $id_medico
  * @property int $id_tipo_motivo
- * @property int $id_motivo
- * @property Persona $persona
+ * @property int $id_consulta
  * @property Persona $persona
  * @property TblConsultum $tblConsultum
  * @property TblTipoMotivo $tblTipoMotivo
  */
-class Historias extends Model
+class Historia extends Model
 {
     /**
      * The table associated with the model.
@@ -34,7 +32,7 @@ class Historias extends Model
     /**
      * @var array
      */
-    protected $fillable = ['id_paciente', 'id_medico', 'id_tipo_motivo', 'id_motivo'];
+    protected $fillable = ['id_paciente', 'id_tipo_motivo', 'id_consulta'];
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
@@ -47,14 +45,9 @@ class Historias extends Model
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    
-
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
     public function tblConsultum()
     {
-        return $this->belongsTo('App\TblConsultum', 'id_motivo', 'id_consulta');
+        return $this->belongsTo('App\TblConsultum', 'id_consulta', 'id_consulta');
     }
 
     /**
