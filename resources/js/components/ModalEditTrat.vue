@@ -9,7 +9,8 @@
       <div class="my-4">
         <h4>Informacion Basica del Paciente:</h4>
         <p>
-          Nombre y Apellido: {{ data.persona.nombre }} {{ data.persona.apellido }}<br />
+          Nombre y Apellido: {{ data.persona.nombre }} {{ data.persona.apellido
+          }}<br />
           Cedula: V-{{ data.persona.cedula }}<br />
           Edad: {{ data.persona.edad }}<br />
         </p>
@@ -64,9 +65,7 @@
       <button @click="close('Modal closed')" class="btn btn-danger">
         Cerrar
       </button>
-      <button @click="guardar" class="btn btn-primary">
-        Guardar
-      </button>
+      <button @click="guardar" class="btn btn-primary">Guardar</button>
     </ModalFooter>
   </Modal>
 </template>
@@ -95,7 +94,7 @@ export default {
   components: { Modal, ModalHeader, ModalBody, ModalFooter, Datepicker },
   mixins: [ModalMixin],
   data() {
-    return {      
+    return {
       editedTratamiento: {
         fecha_inicio: "",
       },
@@ -124,9 +123,31 @@ export default {
 
   methods: {
     async guardar() {
-        await axios.post("/tratamientos/" + this.data.tratamiento.id_tratamientos, { data: this.data.tratamiento, _method: 'put'});
-        this.close('Modal closed');
-        this.$toast('Tratamiento: T_' + this.data.tratamiento.id_tratamientos + ' Modificado Exitosamente!');
+      if (
+        this.data.tratamiento.fecha_inicio &&
+        this.data.tratamiento.fecha_fin
+      ) {
+        var res = moment(this.data.tratamiento.fecha_fin).isBetween(
+          this.data.tratamiento.fecha_inicio,
+          moment(this.data.tratamiento.fecha_inicio).add(5, "days")
+        );
+        if (!res) {
+          this.$toast.error(
+            "La duración del tratamiento debe ser de maximo 5 días"
+          );
+        } else {
+          await axios.post(
+            "/tratamientos/" + this.data.tratamiento.id_tratamientos,
+            { data: this.data.tratamiento, _method: "put" }
+          );
+          this.close("Modal closed");
+          this.$toast(
+            "Tratamiento: T_" +
+              this.data.tratamiento.id_tratamientos +
+              " Modificado Exitosamente!"
+          );
+        }
+      }
     },
     fixDate(event) {
       return moment(event).format("YYYY-MM-DD");

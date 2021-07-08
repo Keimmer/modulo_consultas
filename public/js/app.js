@@ -3867,7 +3867,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
-//
 
 
 
@@ -3924,22 +3923,41 @@ Vue.use(vue_toastification__WEBPACK_IMPORTED_MODULE_9__.default, options);
       var _this = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
+        var res;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                _context.next = 2;
+                if (!(_this.data.tratamiento.fecha_inicio && _this.data.tratamiento.fecha_fin)) {
+                  _context.next = 10;
+                  break;
+                }
+
+                res = moment__WEBPACK_IMPORTED_MODULE_7___default()(_this.data.tratamiento.fecha_fin).isBetween(_this.data.tratamiento.fecha_inicio, moment__WEBPACK_IMPORTED_MODULE_7___default()(_this.data.tratamiento.fecha_inicio).add(5, "days"));
+
+                if (res) {
+                  _context.next = 6;
+                  break;
+                }
+
+                _this.$toast.error("La duración del tratamiento debe ser de maximo 5 días");
+
+                _context.next = 10;
+                break;
+
+              case 6:
+                _context.next = 8;
                 return axios.post("/tratamientos/" + _this.data.tratamiento.id_tratamientos, {
                   data: _this.data.tratamiento,
-                  _method: 'put'
+                  _method: "put"
                 });
 
-              case 2:
-                _this.close('Modal closed');
+              case 8:
+                _this.close("Modal closed");
 
-                _this.$toast('Tratamiento: T_' + _this.data.tratamiento.id_tratamientos + ' Modificado Exitosamente!');
+                _this.$toast("Tratamiento: T_" + _this.data.tratamiento.id_tratamientos + " Modificado Exitosamente!");
 
-              case 4:
+              case 10:
               case "end":
                 return _context.stop();
             }
@@ -3984,6 +4002,10 @@ function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
+//
+//
+//
+//
 //
 //
 //
@@ -4125,22 +4147,52 @@ Vue.use(vue_toastification__WEBPACK_IMPORTED_MODULE_6__.default, options);
       var _this = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
+        var err;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
+                err = 0;
+
+                if (!_this.nuevoRecipe.medicamentosInd.length) {
+                  _context.next = 13;
+                  break;
+                }
+
+                _this.nuevoRecipe.medicamentosInd.forEach(function (medicamento) {
+                  if (medicamento.value !== " " && medicamento.indicaciones) {
+                    console.log("ok");
+                  } else {
+                    _this.$toast.error("Cada medicamento debe estar seleccionado y tener las indicaciones correspondientes.");
+
+                    err++;
+                  }
+                });
+
+                if (!(err == 0)) {
+                  _context.next = 11;
+                  break;
+                }
+
                 _this.nuevoRecipe.id_recipe = _this.data.recipe.id_recipe;
                 _this.nuevoRecipe.edit = true;
                 console.log(_this.nuevoRecipe);
-                _context.next = 5;
+                _context.next = 9;
                 return axios.post("/recipes", _this.nuevoRecipe);
 
-              case 5:
-                _this.close('Modal closed');
+              case 9:
+                _this.close("Modal closed");
 
-                _this.$toast('Recipe: R_' + _this.nuevoRecipe.id_recipe + ' Modificado Exitosamente!');
+                _this.$toast("Recipe: R_" + _this.nuevoRecipe.id_recipe + " Modificado Exitosamente!");
 
-              case 7:
+              case 11:
+                _context.next = 14;
+                break;
+
+              case 13:
+                _this.$toast.error("Debe agregar un medicamento como minimo.");
+
+              case 14:
               case "end":
                 return _context.stop();
             }
@@ -4377,15 +4429,15 @@ Vue.use(vue_toastification__WEBPACK_IMPORTED_MODULE_6__.default, options);
                 }
 
                 _this.nuevaConsulta.sintomas.forEach(function (sintoma) {
-                  sintoma.value !== " " ? console.log("ok") : _this.$toast.error("Debe seleccionar cada sintoma."), err++;
+                  sintoma.value !== " " ? console.log("ok") : _this.$toast.error("Debe seleccionar cada sintoma.") + err++;
                 });
 
                 _this.nuevaConsulta.habitos.forEach(function (habito) {
-                  habito.value !== " " ? console.log("ok") : _this.$toast.error("Debe seleccionar cada habito."), err++;
+                  habito.value !== " " ? console.log("ok") : _this.$toast.error("Debe seleccionar cada habito.") + err++;
                 });
 
                 _this.nuevaConsulta.procesos.forEach(function (proceso) {
-                  proceso.value !== " " && proceso.resultado ? console.log("ok") : _this.$toast.error("Debe seleccionar cada proceso e introducir el resultado."), err++;
+                  proceso.value !== " " && proceso.resultado ? console.log("ok") : _this.$toast.error("Debe seleccionar cada proceso e introducir el resultado.") + err++;
                 });
 
                 console.log(err);
@@ -69844,7 +69896,7 @@ var render = function() {
         _c(
           "button",
           { staticClass: "btn btn-primary", on: { click: _vm.guardar } },
-          [_vm._v("\n      Guardar\n    ")]
+          [_vm._v("Guardar")]
         )
       ])
     ],
@@ -69925,7 +69977,7 @@ var render = function() {
             _vm._v(
               "\n        Medico Encargado: " +
                 _vm._s(_vm.data.tratamiento.mednombre) +
-                " " +
+                "\n        " +
                 _vm._s(_vm.data.tratamiento.medapellido) +
                 "\n      "
             )
@@ -69954,11 +70006,19 @@ var render = function() {
                   _vm._l(_vm.data.medicamentos.data, function(medicamento) {
                     return _c("p", [
                       _c("strong", [_vm._v("Medicamento:")]),
-                      _vm._v(" " + _vm._s(medicamento.medicamento) + " "),
+                      _vm._v(
+                        " " +
+                          _vm._s(medicamento.medicamento) +
+                          "\n              "
+                      ),
                       _c("br"),
                       _vm._v(" "),
                       _c("strong", [_vm._v("Tipo Medicamento:")]),
-                      _vm._v(" " + _vm._s(medicamento.tipo_medicamento) + " "),
+                      _vm._v(
+                        "\n              " +
+                          _vm._s(medicamento.tipo_medicamento) +
+                          " "
+                      ),
                       _c("br"),
                       _vm._v(" "),
                       _c("strong", [_vm._v("Indicaciones:")]),
@@ -70107,7 +70167,7 @@ var render = function() {
         _c(
           "button",
           { staticClass: "btn btn-success", on: { click: _vm.guardar } },
-          [_vm._v("\n      Guardar Cambios\n    ")]
+          [_vm._v("Guardar Cambios")]
         )
       ])
     ],

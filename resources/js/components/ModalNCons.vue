@@ -184,14 +184,14 @@ export default {
         this.nuevaConsulta.sintomas.forEach((sintoma) => {
           sintoma.value !== " "
             ? console.log("ok")
-            : this.$toast.error("Debe seleccionar cada sintoma."),
+            : this.$toast.error("Debe seleccionar cada sintoma.") +
             err++;
         });
 
         this.nuevaConsulta.habitos.forEach((habito) => {
           habito.value !== " "
             ? console.log("ok")
-            : this.$toast.error("Debe seleccionar cada habito."),
+            : this.$toast.error("Debe seleccionar cada habito.") +
             err++;
         });
         this.nuevaConsulta.procesos.forEach((proceso) => {
@@ -199,7 +199,7 @@ export default {
             ? console.log("ok")
             : this.$toast.error(
                 "Debe seleccionar cada proceso e introducir el resultado."
-              ),
+              ) +
             err++;
         });
         console.log(err);
