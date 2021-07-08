@@ -17,7 +17,7 @@
       <div class="my-4">
         <h4>Informacion Consulta</h4>
         <p>
-          Consulta N°{{ data.consulta[0].id_consulta }} <br>
+          Consulta N°: C_{{ data.consulta[0].id_consulta }} <br>
           Fecha Consulta {{data.consulta[0].fecha_consulta}} <br>
           
         </p>
@@ -42,6 +42,16 @@
       <button @click="close('Modal closed')" class="btn btn-primary">
         Cerrar
       </button>
+      <button @click="edit" class="btn btn-warning">
+        Editar Diagnostico
+      </button>
+      <button
+        onclick="window.print();return false;"
+        type="button"
+        class="btn btn-success"
+      >
+        Imprimir Diagnostico
+      </button>
       <!-- <button @click="dismiss('Modal dismissed')" class="btn btn-primary">Dismiss Modal</button> -->
     </ModalFooter>
   </Modal>
@@ -53,6 +63,7 @@ import ModalHeader from "./Modals/ModalHeader.vue";
 import ModalFooter from "./Modals/ModalFooter.vue";
 import ModalBody from "./Modals/ModalBody.vue";
 import ModalMixin from "./Modals/mixins/ModalMixin";
+import ModalOpService from "./Modals/services/modal.opservice";
 import uniq from "lodash/uniq";
 //Toasty Notifications
 import Toast from "vue-toastification";
@@ -98,33 +109,9 @@ export default {
     },
   },
   methods: {
-    async showme() {
-      if(this.nuevoDiagnostico.patologia && this.nuevoDiagnostico.estadoDeSalud) {
-        this.nuevoDiagnostico.id_consulta = this.data.consulta[0].id_consulta;
-        console.log(this.nuevoDiagnostico);
-        await axios.post("/diagnosticos", this.nuevoDiagnostico);
-        this.close('Modal closed');
-        this.$toast('Nuevo Diagnostico Registrado Exitosamente!');
-      }
-
-      if (!this.nuevoDiagnostico.patologia) {
-        this.errors.push('La patologia es obligatorio.');
-      }
-      if (!this.nuevoDiagnostico.estadoDeSalud) {
-        this.errors.push('El estado de salud es obligatorio.');
-      }
-    },
-    addSintoma: function () {
-      this.nuevaConsulta.sintomas.push({ value: " " });
-      console.log(this.nuevaConsulta.sintomas);
-    },
-    addHabito: function () {
-      this.nuevaConsulta.habitos.push({ value: " " });
-      console.log(this.nuevaConsulta.habitos);
-    },
-    addProceso: function () {
-      this.nuevaConsulta.procesos.push({ value: " " });
-      console.log(this.nuevaConsulta.procesos);
+    edit() {
+      this.close("Modal closed");
+      ModalOpService.editdiag(this.data);
     },
   },
   computed: {

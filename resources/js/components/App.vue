@@ -14,12 +14,15 @@
       <Tab :isSelected="selected === 'Pacientes'">
         <p></p>
         <h1>Buscar Paciente</h1>
-        <p>Para ver mas informacion del paciente que desea presione doble click sobre su nombre.</p>
+        <p>
+          Para ver mas informacion del paciente que desea presione doble click
+          sobre su nombre.
+        </p>
         <div>
           <input
             type="text"
             name="cedula"
-            @change="onTextChange()"
+            @keyup="onTextChange()"
             class="form-control mb-4"
             v-model="cedula"
             placeholder="Buscar por Numero de Cedula"
@@ -63,18 +66,17 @@
         <!-- ------------------------------ -->
         <!-- ------------------------------ -->
         <!-- End of the table -->
-
-        <!-- Boton para la ventana modal -->
-
-        <button @click="addModal" class="btn btn-primary">Ver Paciente</button>
       </Tab>
       <Tab :isSelected="selected === 'Consultas'">
-        <div class="row m-3">
+        <div class="row my-3">
           <div class="col">
             <PerfilPaciente
               v-if="selectedUser"
               :data="persona"
             ></PerfilPaciente>
+            <button @click="nuevaConsulta" class="btn btn-success">
+              Nueva Consulta
+            </button>
           </div>
           <div class="col">
             <div class="mx-auto" style="width: 200px">
@@ -96,7 +98,7 @@
             <tr>
               <th scope="col">Numero Consulta</th>
               <th scope="col">Fecha Consulta</th>
-              <th scope="col">Medico Tratante</th>
+              <th scope="col">Medico De La Consulta</th>
               <th scope="col">Especialidad Consulta</th>
               <th scope="col">Cantidad de Procedimientos</th>
             </tr>
@@ -110,6 +112,7 @@
               :ref="'ref_' + index"
               @mouseover="divDragOver($event, index)"
               @click="selectRowConsulta(consulta)"
+              @dblclick="verConsulta"
               :class="{ highlightCons: consulta.id_consulta == selectedCons }"
             >
               <td scope="row">C_{{ consulta.id_consulta }}</td>
@@ -123,38 +126,22 @@
         <!-- ------------------------------ -->
         <!-- ------------------------------ -->
         <!-- End of the table -->
-
-        <div class="trslt-btn" :style="{ top: 300+top+'px' }">
-          <button @click="nuevaConsulta" class="btn btn-primary">
-            Nueva Consulta
-          </button>
-        </div>
-        <button @click="verConsulta" type="button" class="btn btn-primary my-4">
-          Ver Consulta
-        </button>
-        <button
-          @click="editarConsulta()"
-          type="button"
-          class="btn btn-primary my-4"
-        >
-          Editar Consulta
-        </button>
-        <button
-          @click="imprimirConsulta()"
-          type="button"
-          class="btn btn-success my-4"
-        >
-          Imprimir Consulta
-        </button>
       </Tab>
       <Tab :isSelected="selected === 'Diagnosticos'">
         <p></p>
-        <div class="row m-3">
+        <div class="row my-3">
           <div class="col">
             <PerfilPaciente
               v-if="selectedUser"
               :data="persona"
             ></PerfilPaciente>
+            <button
+              @click="nuevoDiagnostico"
+              type="button"
+              class="btn btn-success"
+            >
+              Nuevo Diagnostico
+            </button>
           </div>
           <div class="col">
             <div class="mx-auto" style="width: 200px">
@@ -188,6 +175,7 @@
               class="tr-anim"
               :key="diagnostico.id_diagnosticos"
               @click="selectRowDiag(diagnostico)"
+              @dblclick="verDiagnostico"
               :class="{
                 highlightDiag: diagnostico.id_diagnosticos == selectedDiag,
               }"
@@ -203,44 +191,22 @@
         <!-- ------------------------------ -->
         <!-- ------------------------------ -->
         <!-- End of the table -->
-
-        <button
-          @click="nuevoDiagnostico"
-          type="button"
-          class="btn btn-success my-4"
-        >
-          Nuevo Diagnostico
-        </button>
-        <button
-          @click="verDiagnostico"
-          type="button"
-          class="btn btn-primary my-4"
-        >
-          Ver Diagnostico
-        </button>
-        <button
-          @click="editarDiagnostico()"
-          type="button"
-          class="btn btn-primary my-4"
-        >
-          Editar Diagnostico
-        </button>
-        <button
-          @click="imprimirDiagnostico()"
-          type="button"
-          class="btn btn-success my-4"
-        >
-          Imprimir Diagnostico
-        </button>
       </Tab>
       <Tab :isSelected="selected === 'Tratamientos'">
         <p></p>
-        <div class="row m-3">
+        <div class="row my-3">
           <div class="col">
             <PerfilPaciente
               v-if="selectedUser"
               :data="persona"
             ></PerfilPaciente>
+            <button
+              @click="nuevoTratamiento()"
+              type="button"
+              class="btn btn-success my-2"
+            >
+              Nuevo Tratamiento
+            </button>
           </div>
           <div class="col">
             <div class="mx-auto" style="width: 200px">
@@ -274,6 +240,7 @@
               class="tr-anim"
               :key="tratamiento.id"
               @click="selectRowTrat(tratamiento)"
+              @dblclick="verTratamiento"
               :class="{
                 highlightTrat: tratamiento.id_tratamientos == selectedTrat,
               }"
@@ -289,49 +256,25 @@
         <!-- ------------------------------ -->
         <!-- ------------------------------ -->
         <!-- End of the table -->
-
-        <!-- Botones de tratamientos -->
-
-        <button
-          @click="nuevoTratamiento()"
-          type="button"
-          class="btn btn-success my-4"
-        >
-          Nuevo Tratamiento
-        </button>
-        <button
-          v-if="selectedTrat"
-          @click="verTratamiento()"
-          type="button"
-          class="btn btn-primary my-4"
-        >
-          Ver Tratamiento
-        </button>
-        <button
-          v-if="selectedTrat"
-          @click="editarTratamiento()"
-          type="button"
-          class="btn btn-primary my-4"
-        >
-          Editar Tratamiento
-        </button>
-        <button
-          v-if="selectedTrat"
-          @click="imprimirTratamiento()"
-          type="button"
-          class="btn btn-success my-4"
-        >
-          Imprimir Tratamiento
-        </button>
       </Tab>
       <Tab :isSelected="selected === 'Recipes'">
         <p></p>
-        <div class="row m-3">
+        <div class="row my-3">
           <div class="col">
             <PerfilPaciente
               v-if="selectedUser"
               :data="persona"
             ></PerfilPaciente>
+            <button
+              @click="
+                modificar = false;
+                nuevoRecipe();
+              "
+              type="button"
+              class="btn btn-success my-2"
+            >
+              Nuevo Recipe
+            </button>
           </div>
           <div class="col">
             <div class="mx-auto" style="width: 200px">
@@ -364,6 +307,7 @@
               class="tr-anim"
               :key="recipe.id_recipe"
               @click="selectRowRecipe(recipe)"
+              @dblclick="verRecipe(selectedRecipe)"
               :class="{ highlightRecipe: recipe.id_recipe == selectedRecipe }"
             >
               <td>T_{{ recipe.id_tratamientos }}</td>
@@ -376,56 +320,17 @@
         <!-- ------------------------------ -->
         <!-- ------------------------------ -->
         <!-- End of the table -->
-
-        <!-- Boton para la ventana modal -->
-        <button
-          @click="
-            modificar = false;
-            nuevoRecipe();
-          "
-          type="button"
-          class="btn btn-success my-4"
-        >
-          Nuevo Recipe
-        </button>
-        <button
-          v-if="selectedRecipe"
-          @click="verRecipe(selectedRecipe)"
-          type="button"
-          class="btn btn-primary my-4"
-        >
-          Ver Recipe
-        </button>
-        <button
-          v-if="selectedRecipe"
-          @click="
-            modificar = false;
-            verRecipe();
-          "
-          type="button"
-          class="btn btn-success my-4"
-        >
-          Imprimir Recipe
-        </button>
-        <button
-          v-if="selectedRecipe"
-          @click="editarRecipe(selectedRecipe)"
-          type="button"
-          class="btn btn-warning my-4"
-        >
-          Editar Recipe
-        </button>
       </Tab>
     </TabNav>
 
-    <ModalRoot :listdata="persona"></ModalRoot>
+    <ModalRoot></ModalRoot>
   </div>
 </template>
 <script>
 import TabNav from "./TabNav.vue";
 import Tab from "./Tab.vue";
 import ModalRoot from "./Modals/ModalRoot.vue";
-import ModalService from "./Modals/services/modal.service";
+import ModalOpService from "./Modals/services/modal.opservice";
 import TestModal from "./TestModal.vue";
 //Modales Consultas//
 import ModalNCons from "./ModalNCons.vue";
@@ -443,7 +348,7 @@ import ModalEditTratamiento from "./ModalEditTrat.vue";
 import ModalNuevoRecipe from "./ModalNRecipe.vue";
 import ModalVerRecipe from "./ModalVerRecipe.vue";
 import ModalEditarRecipe from "./ModalEditarRecipe.vue";
-import modalService from "./Modals/services/modal.service";
+import ModalService from "./Modals/services/modal.service";
 import PerfilPaciente from "./PerfilPaciente.vue";
 //Toasty Notifications
 import Toast from "vue-toastification";
@@ -461,9 +366,9 @@ export default {
   components: { TabNav, Tab, ModalRoot, PerfilPaciente },
   data() {
     return {
+      cedula: "",
       data: {
         key: "",
-        cedula: "",
       },
       selected: "Pacientes",
       persona: {
@@ -548,6 +453,24 @@ export default {
       selectedRecipe: "",
     };
   },
+
+  created() {
+    ModalOpService.$on("editcons", ({ data }) => {
+      this.editarConsulta();
+    });
+    ModalOpService.$on("editdiag", ({ data }) => {
+      this.editarDiagnostico();
+    });
+    ModalOpService.$on("edittrat", ({ data }) => {
+      this.editarTratamiento();
+    });
+    ModalOpService.$on("editrec", ({ data }) => {
+      this.editarRecipe();
+    });
+
+    this.listarPers();
+  },
+
   methods: {
     divDragOver(e, i) {
       let [div] = this.$refs["ref_" + i];
@@ -600,8 +523,8 @@ export default {
       ModalService.recievedata(this.persona);
       ModalService.recieveEspecialidad(this.especialidades);
       ModalService.recieveSintomas(this.sintomas);
-      modalService.recieveHabitos(this.habitos);
-      modalService.recieveProcesos(this.procesos);
+      ModalService.recieveHabitos(this.habitos);
+      ModalService.recieveProcesos(this.procesos);
     },
     verConsulta() {
       ModalService.open(ModalVerConsulta);
@@ -610,6 +533,7 @@ export default {
       ModalService.recievedata(this.verConsultaObj);
     },
     async editarConsulta() {
+      console.log("trying");
       ModalService.open(ModalEditarConsulta);
       this.verConsultaObj.consulta = this.consulta;
       this.verConsultaObj.persona = this.persona;
@@ -670,40 +594,27 @@ export default {
       ModalService.recievedata(this.nuevoRecipeObj);
     },
 
-    async verRecipe(recipe_id) {
+    async verRecipe() {
       ModalService.open(ModalVerRecipe);
       this.verRecipeObj.persona = this.persona;
       this.verRecipeObj.tratamiento = this.tratamiento;
       this.verRecipeObj.recipe = this.recipe;
       this.verRecipeObj.medicamentos = await axios.get("/recipes", {
-        params: { id_recipe: recipe_id },
+        params: { id_recipe: this.selectedRecipe },
       });
       ModalService.recievedata(this.verRecipeObj);
     },
 
-    async editarRecipe(recipe_id) {
+    async editarRecipe() {
       ModalService.open(ModalEditarRecipe);
       this.verRecipeObj.persona = this.persona;
       this.verRecipeObj.tratamiento = this.tratamiento;
       this.verRecipeObj.recipe = this.recipe;
       this.verRecipeObj.medicamentos = await axios.get("/recipes", {
-        params: { id_recipe: recipe_id },
+        params: { id_recipe: this.selectedRecipe },
       });
       this.verRecipeObj.addMedicamentos = await axios.get("/medicamentos");
       ModalService.recievedata(this.verRecipeObj);
-    },
-
-    BuscarCedulaNombre(event) {
-      console.log(event.target.value);
-      if (this.cednom == 1) {
-        this.porCedula = true;
-        this.porNombre = false;
-      }
-
-      if (this.cednom == 2) {
-        this.porCedula = false;
-        this.porNombre = true;
-      }
     },
 
     selectRow(persona) {
@@ -713,26 +624,21 @@ export default {
       console.log(this.selectedPersona);
     },
 
-    abrir() {
-      (this.viewConsulta = true), (this.vista = 1);
-    },
-
     selectRowRecipe(recipe) {
       console.log(recipe);
       this.selectedRecipe = recipe.id_recipe;
       this.recipe = recipe;
     },
 
-    onChange() {
-      //
-    },
     seleccionar(id_pers) {
       this.id_pers = id_pers;
     },
+
     onTextChange() {
       this.perced = this.cedula;
       this.listarPer();
     },
+
     setSelected(tab) {
       if (tab === "Pacientes") {
         this.selected = tab;
@@ -796,9 +702,7 @@ export default {
 
     //listar Personas
 
-    created() {
-      this.listarPers();
-    },
+    created() {},
 
     /* Listar Tratamientos */
     async listarTrat() {
@@ -948,7 +852,7 @@ tr:hover {
   -webkit-transition: opacity 1s;
   transition: opacity 1s;
   /* /////////ANIMATIONS///////////// */
-  animation-duration: 1s;
+  animation-duration: 0.7s;
   animation-timing-function: ease-out;
   animation-delay: calc(0.07s * var(--index));
   animation-iteration-count: 1;

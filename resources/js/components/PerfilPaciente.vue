@@ -29,6 +29,16 @@
                                         <h6 class="text-muted f-w-400">{{data.edad}}</h6>
                                     </div>
                                 </div>
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <p class="m-b-10 f-w-600">Dirección</p>
+                                        <h6 class="text-muted f-w-400">{{data.direccion}}</h6>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <p class="m-b-10 f-w-600">Numero Telefonico</p>
+                                        <h6 class="text-muted f-w-400">{{data.telefono}}</h6>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -88,8 +98,8 @@ export default {
 }
 
 .bg-c-lite-green {
-    background: -webkit-gradient(linear, left top, right top, from(#6390f2), to(#5a84ee));
-    background: linear-gradient(to right, #5a6bee, #6390f2)
+    background: -webkit-gradient(linear, left top, right top, from(#4361ee), to(#4895ef));
+    background: linear-gradient(to right, #4361ee, #4895ef)
 }
 
 .user-profile {

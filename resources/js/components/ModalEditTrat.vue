@@ -46,13 +46,13 @@
 
       <h5>Objetivos y riesgos del Tratamiento</h5>
       <div class="row">
-        <div class="col m-2 card lb-gradient">
+        <div class="col m-2 card bluegradiente">
           <div class="card-body">
             <h5 class="card-title">Objetivos</h5>
             <p class="card-text">{{ data.tratamiento.objetivo }}</p>
           </div>
         </div>
-        <div class="col m-2 card lb-gradient">
+        <div class="col m-2 card bluegradiente">
           <div class="card-body">
             <h5 class="card-title">Riesgos</h5>
             <p class="card-text">{{ data.tratamiento.riesgos }}</p>

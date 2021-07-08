@@ -6,36 +6,38 @@
       </h3>
     </ModalHeader>
     <ModalBody>
-      <div class="my-4">
-        <h4>Informacion Basica del Paciente:</h4>
-        <p>
-          Nombre y Apellido: {{ data.persona.nombre }} {{ data.persona.apellido
-          }}<br />
-          Cedula: V-{{ data.persona.cedula }}<br />
-          Edad: {{ data.persona.edad }}<br />
-        </p>
-      </div>
-      <div class="my-4">
-        <h4>Detalles Tratamiento</h4>
-        <p>
-          Tratamiento N°: T_{{ data.tratamiento.id_tratamientos }} <br />
-          Tipo de Tratamiento: {{ data.tratamiento.tipo_tratamiento }} <br />
-          Medico Encargado: {{ data.tratamiento.mednombre }}
-          {{ data.tratamiento.medapellido }} <br />
-          Fecha Inicio Tratamiento: {{ data.tratamiento.fecha_inicio }} <br />
-          Fecha Fin Tratamiento: {{ data.tratamiento.fecha_fin }} <br />
-        </p>
+      <div class="row">
+        <div class="col my-4">
+          <h4>Informacion Basica del Paciente:</h4>
+          <p>
+            Nombre y Apellido: {{ data.persona.nombre }}
+            {{ data.persona.apellido }}<br />
+            Cedula: V-{{ data.persona.cedula }}<br />
+            Edad: {{ data.persona.edad }}<br />
+          </p>
+        </div>
+        <div class="col my-4">
+          <h4>Detalles del Tratamiento</h4>
+          <p>
+            Tratamiento N°: T_{{ data.tratamiento.id_tratamientos }} <br />
+            Tipo de Tratamiento: {{ data.tratamiento.tipo_tratamiento }} <br />
+            Medico Encargado: {{ data.tratamiento.mednombre }}
+            {{ data.tratamiento.medapellido }} <br />
+            Fecha Inicio Tratamiento: {{ data.tratamiento.fecha_inicio }} <br />
+            Fecha Fin Tratamiento: {{ data.tratamiento.fecha_fin }} <br />
+          </p>
+        </div>
       </div>
 
-      <h5>Objetivos y riesgos del Tratamiento</h5>
+      <h5 class="center">Objetivos y riesgos del Tratamiento</h5>
       <div class="row">
-        <div class="col m-2 card lb-gradient">
+        <div class="col m-2 card bluegradiente">
           <div class="card-body">
             <h5 class="card-title">Objetivos</h5>
             <p class="card-text">{{ data.tratamiento.objetivo }}</p>
           </div>
         </div>
-        <div class="col m-2 card lb-gradient">
+        <div class="col m-2 card bluegradiente">
           <div class="card-body">
             <h5 class="card-title">Riesgos</h5>
             <p class="card-text">{{ data.tratamiento.riesgos }}</p>
@@ -47,6 +49,14 @@
       <button @click="close('Modal closed')" class="btn btn-primary">
         Cerrar
       </button>
+      <button @click="edit" class="btn btn-warning">Editar Tratamiento</button>
+      <button
+        onclick="window.print();return false;"
+        type="button"
+        class="btn btn-success"
+      >
+        Imprimir Tratamiento
+      </button>
     </ModalFooter>
   </Modal>
 </template>
@@ -57,6 +67,7 @@ import ModalHeader from "./Modals/ModalHeader.vue";
 import ModalFooter from "./Modals/ModalFooter.vue";
 import ModalBody from "./Modals/ModalBody.vue";
 import ModalMixin from "./Modals/mixins/ModalMixin";
+import ModalOpService from "./Modals/services/modal.opservice";
 export default {
   components: { Modal, ModalHeader, ModalBody, ModalFooter },
   mixins: [ModalMixin],
@@ -85,6 +96,12 @@ export default {
       id_consulta: "",
       sintomas: [],
       habitos: [],
+    },
+  },
+  methods: {
+    edit() {
+      this.close("Modal closed");
+      ModalOpService.edittrat(this.data);
     },
   },
 };

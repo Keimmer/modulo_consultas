@@ -6,72 +6,75 @@
       </h3>
     </ModalHeader>
     <ModalBody>
-      <div class="my-4">
-        <h4>Datos del Paciente:</h4>
-        <p>
-          Nombre y Apellido: {{ data.persona.nombre }} {{ data.persona.apellido }}<br />
-          Cedula: V-{{ data.persona.cedula }}<br />
-          Edad: {{ data.persona.edad }}<br />
-        </p>
+      <div class="row">
+        <div class="col my-4">
+          <h4>Datos del Paciente:</h4>
+          <p>
+            Nombre y Apellido: {{ data.persona.nombre }}
+            {{ data.persona.apellido }}<br />
+            Cedula: V-{{ data.persona.cedula }}<br />
+            Edad: {{ data.persona.edad }}<br />
+          </p>
+        </div>
+        <div class="col my-4">
+          <h4>Informacion Diagnostico</h4>
+          <p>
+            Diagnostico N°: D_{{ data.diagnostico.id_diagnosticos }} <br />
+            Fecha Diagnostico: {{ data.diagnostico.fecha_diag }} <br />
+            Patologia: {{ data.diagnostico.nombre_patologia }}
+          </p>
+        </div>
       </div>
-      <div class="my-4">
-        <h4>Informacion Diagnostico</h4>
-        <p>
-          Diagnostico N° D_{{ data.diagnostico.id_diagnosticos }} <br>
-          Fecha Diagnostico {{ data.diagnostico.fecha_diag}} <br>
-          Patologia {{ data.diagnostico.nombre_patologia }}
-        </p>
-      </div>
-      <div class="my-4">
-        <p v-if="errors.length">
-        <b>Por favor, corrija el(los) siguiente(s) error(es):</b>
-        <ul>
-          <li v-for="error in errors">{{ error }}</li>
-        </ul>
-        </p>
-      </div>
-      <div class="my-4">
-        <label for="">Seleccione el Tratamiento</label>
-        <select name="" class="form-control" @change="getMedicosXEspecialidad" v-model="nuevoTratamiento.nombre_tratamiento">
-          <option
-            v-for="tipoTrat in data.tipos_trat.data"
-            :key="tipoTrat.id_especialidad"
+      <div class="row">
+        <div class="col my-4">
+          <label for="">Seleccione el Tratamiento</label>
+          <select
+            name=""
+            class="form-control"
+            @change="getMedicosXEspecialidad"
+            v-model="nuevoTratamiento.nombre_tratamiento"
           >
-            {{ tipoTrat.tipo_tratamiento }}
-          </option>
-        </select>
-      </div>
+            <option
+              v-for="tipoTrat in data.tipos_trat.data"
+              :key="tipoTrat.id_especialidad"
+            >
+              {{ tipoTrat.tipo_tratamiento }}
+            </option>
+          </select>
+        </div>
 
-      <div class="row mt-4">
-        <div class="col-sm-9">
+        <div class="col my-4">
           <label>Medico Encargado</label>
-          <select name="" class="form-control" v-model="nuevoTratamiento.medico">
+          <select
+            name=""
+            class="form-control"
+            v-model="nuevoTratamiento.medico"
+          >
             <option v-for="medico in medicos.data" :key="medico.id">
               {{ medico.mednom }} {{ medico.medap }}
             </option>
           </select>
         </div>
       </div>
-
       <div class="row mt-4">
         <div class="col-sm-9">
           <label>Seleccione fecha inicio del Tratamiento</label>
-          <Datepicker 
+          <Datepicker
             :bootstrap-styling="true"
             format="yyyy-MM-dd"
             :language="es"
-            :value="fecha_inicio"       
+            :value="fecha_inicio"
             :disabled-dates="DisabledDates"
             @input="fecha_inicio = fixDate($event)"
           >
           </Datepicker>
         </div>
       </div>
-      
+
       <div class="row mt-4">
         <div class="col-sm-9">
           <label>Seleccione fecha final del Tratamiento</label>
-          <Datepicker 
+          <Datepicker
             :bootstrap-styling="true"
             format="yyyy-MM-dd"
             :language="es"
@@ -82,18 +85,28 @@
           </Datepicker>
         </div>
       </div>
-      
+
       <div class="row mt-4">
         <div class="col sm-9">
           <label>Ingrese El objetivo del tratamiento</label>
-          <textarea class="form-control" cols="30" rows="10" v-model="nuevoTratamiento.objetivo"></textarea>
+          <textarea
+            class="form-control"
+            cols="30"
+            rows="5"
+            v-model="nuevoTratamiento.objetivo"
+          ></textarea>
         </div>
       </div>
-      
+
       <div class="row mt-4">
         <div class="col sm-9">
           <label>Ingrese los posibles riesgos del tratamiento</label>
-          <textarea class="form-control" cols="30" rows="10" v-model="nuevoTratamiento.riesgos"></textarea>
+          <textarea
+            class="form-control"
+            cols="30"
+            rows="5"
+            v-model="nuevoTratamiento.riesgos"
+          ></textarea>
         </div>
       </div>
     </ModalBody>
@@ -178,36 +191,62 @@ export default {
         this.nuevoTratamiento.objetivo &&
         this.nuevoTratamiento.riesgos
       ) {
-        this.nuevoTratamiento.fecha_inicio = this.fecha_inicio;
-        this.nuevoTratamiento.fecha_fin = this.fecha_fin;
-        this.nuevoTratamiento.id_diagnostico =
-          this.data.diagnostico.id_diagnosticos;
-        var res = await axios.get("/getmed", {
-          params: { nombre: this.nuevoTratamiento.medico },
-        });
-        this.nuevoTratamiento.id_medico = res.data;
-        console.log(this.nuevoTratamiento);
-        await axios.post("/tratamientos", this.nuevoTratamiento);
-        this.close("Modal closed");
-        this.$toast("Nuevo Tratamiento Guardado Exitosamente!");
+        if (this.fecha_inicio && this.fecha_fin) {
+          var res = moment(this.fecha_fin).isBetween(
+            this.fecha_inicio,
+            moment(this.fecha_inicio).add(5, "days")
+          );
+          if (!res) {
+            this.$toast.error(
+              "La duración del tratamiento debe ser de maximo 5 días"
+            );
+          } else {
+            this.nuevoTratamiento.fecha_inicio = this.fecha_inicio;
+            this.nuevoTratamiento.fecha_fin = this.fecha_fin;
+            this.nuevoTratamiento.id_diagnostico =
+              this.data.diagnostico.id_diagnosticos;
+            var res = await axios.get("/getmed", {
+              params: { nombre: this.nuevoTratamiento.medico },
+            });
+            this.nuevoTratamiento.id_medico = res.data;
+            console.log(this.nuevoTratamiento);
+            await axios.post("/tratamientos", this.nuevoTratamiento);
+            this.close("Modal closed");
+            this.$toast("Nuevo Tratamiento Guardado Exitosamente!");
+          }
+        }
       }
       if (!this.nuevoTratamiento.nombre_tratamiento) {
-        this.$toast.error('El Tipo de Tratamiento es obligatorio.');
+        this.$toast.error("El Tipo de Tratamiento es obligatorio.");
       }
       if (!this.nuevoTratamiento.medico) {
-        this.$toast.error('El medico para el tratamiento es obligatorio.');
+        this.$toast.error("El medico para el tratamiento es obligatorio.");
       }
-      if(!this.fecha_inicio) {
-        this.$toast.error('La fecha de inicio del tratamiento es obligatoria.');
+      if (!this.fecha_inicio) {
+        //debe ser una semana entre las fechas maximo
+        this.$toast.error("La fecha de inicio del tratamiento es obligatoria.");
       }
-      if(!this.fecha_fin) {
-        this.$toast.error('La fecha final del tratamiento es obligatoria.');
+      if (!this.fecha_fin) {
+        this.$toast.error("La fecha final del tratamiento es obligatoria.");
       }
+      /* if (this.fecha_inicio && this.fecha_fin) {
+        var res = moment(this.fecha_fin).isBetween(
+          this.fecha_inicio,
+          moment(this.fecha_inicio).add(5, "days")
+        );
+        if (!res) {
+          this.$toast.error(
+            "La duración del tratamiento debe ser de maximo 5 días"
+          );
+        }
+      } */
       if (!this.nuevoTratamiento.objetivo) {
-        this.$toast.error('El objetivo del tratamiento es obligatorio.');
+        this.$toast.error("El objetivo del tratamiento es obligatorio.");
       }
       if (!this.nuevoTratamiento.riesgos) {
-        this.$toast.error('Los posibles riesgos del tratamiento son obligatorios.')
+        this.$toast.error(
+          "Los posibles riesgos del tratamiento son obligatorios."
+        );
       }
     },
     fechainicio() {

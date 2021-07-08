@@ -8,7 +8,7 @@
     <ModalBody>
       <div class="row">
         <div class="col">
-          <div class="card bluegradient" style="width: 18rem">
+          <div class="card bluegradiente">
             <div class="card-body">
               <h5 class="card-title">Datos del Paciente</h5>
               <h6>Nombres y Apellidos:</h6>
@@ -23,7 +23,7 @@
           </div>
         </div>
         <div class="col">
-          <div class="card greengradient" style="width: 18rem">
+          <div class="card purplegradient">
             <div class="card-body">
               <h5 class="card-title">Fecha de la Consulta</h5>
               <p class="card-text">{{ data.consulta[0].fecha_consulta }}</p>
@@ -33,7 +33,7 @@
               </p>
               <h5 class="card-title">Sintomas del Paciente</h5>
               <p class="card-text" v-for="sintoma in getSintomas">
-                {{ sintoma }}
+                <strong>Sintoma: </strong>{{ sintoma }}
               </p>
             </div>
           </div>
@@ -42,7 +42,7 @@
 
       <div class="row">
         <div class="col">
-          <div class="card yellowgradient" style="width: 18rem">
+          <div class="card purplegradient">
             <div class="card-body">
               <h5 class="card-title">Habitos del Paciente</h5>
               <p
@@ -50,13 +50,13 @@
                 v-for="habito in getHabitos"
                 :key="habito.id_habito"
               >
-                {{ habito }}
+                <strong>Habito:</strong> {{ habito }}
               </p>
             </div>
           </div>
         </div>
         <div class="col">
-          <div class="card redgradient" style="width: 18rem">
+          <div class="card bluegradiente">
             <div class="card-body">
               <h5 class="card-title">Procedimientos en la Consulta</h5>
               <p
@@ -64,7 +64,7 @@
                 v-for="(procedimiento, index) in getProcedimiento"
                 :key="index"
               >
-                {{ procedimiento }} {{ data.consulta[index].resultado }}
+                <strong> Procedimiento: </strong>{{ procedimiento }} <br> <strong>Resultado:</strong> {{ data.consulta[index].resultado }}
               </p>
             </div>
           </div>
@@ -73,7 +73,7 @@
 
       <div class="row mt-4">
         <div class="col-sm-9">
-          <h4 class="my-2">Procedimientos <button class="btn btn-primary" @click="addProceso">+</button></h4>          
+          <h4 class="my-2">Añadir Procedimientos <button class="btn btn-primary" @click="addProceso">+</button></h4>          
           <div class="row">
             <div class="col col-md-9" v-for="proceso in nuevaConsulta.procesos">
               <h6 class="my-2">Procedimiento</h6>

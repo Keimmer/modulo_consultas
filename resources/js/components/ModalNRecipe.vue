@@ -30,7 +30,10 @@
           <label>Medicamentos</label>
           <button class="btn btn-primary" @click="addMedicamento">+</button>
           <div class="row">
-            <div class="col col-md-9" v-for="MedInd in nuevoRecipe.medicamentosInd">
+            <div
+              class="col col-md-9"
+              v-for="MedInd in nuevoRecipe.medicamentosInd"
+            >
               <label class="mt-2">Nombre Medicamento</label>
               <select
                 class="form-control mb-2"
@@ -117,11 +120,29 @@ export default {
   },
   methods: {
     async showme() {
-      this.nuevoRecipe.id_tratamiento = this.data.tratamiento.id_tratamientos;
-      console.log(this.nuevoRecipe);
-      await axios.post("/recipes", this.nuevoRecipe);
-      this.close("Modal closed");
-      this.$toast('Nuevo Recipe Registrado Exitosamente!');
+      var err = 0;
+      if (this.nuevoRecipe.medicamentosInd.length) {
+        this.nuevoRecipe.medicamentosInd.forEach((medicamento) => {
+          if (medicamento.value !== " " && medicamento.indicaciones) {
+            console.log("ok");
+          } else {
+            this.$toast.error(
+              "Cada medicamento debe estar seleccionado y tener las indicaciones correspondientes."
+            );
+            err++;
+          }
+        });
+        if (err == 0) {
+          this.nuevoRecipe.id_tratamiento =
+          this.data.tratamiento.id_tratamientos;
+          console.log(this.nuevoRecipe);
+          await axios.post("/recipes", this.nuevoRecipe);
+          this.close("Modal closed");
+          this.$toast("Nuevo Recipe Registrado Exitosamente!");
+        }
+      } else {
+        this.$toast.error("Debe agregar un medicamento como minimo.");
+      }
     },
     addMedicamento: function () {
       this.nuevoRecipe.medicamentosInd.push({ value: " " });

@@ -10,6 +10,7 @@ use App\Models\Sintoma;
 use App\Models\Habito;
 use App\Models\ProcedimientoXConsulta;
 use App\Models\Procesos;
+use App\Models\Persona;
 use App\Models\HabitosXConsulta;
 use App\Models\SintomXConsulta;
 use Illuminate\Support\Facades\Log;
@@ -111,7 +112,7 @@ class ConsultaController extends Controller
         //in this line of code i insert the consulta row i use the insertGetId to get the id as a result
         $idLastCon = Consulta::insertGetId([
             'fecha_consulta' => Consulta::raw('CURDATE()'),
-            'id_medico' => 1,
+            'id_medico' => Persona::where(Persona::raw('concat(nombre, " ", apellido)'), 'LIKE', '%'.auth()->user()->name.'%' )->first()->id_persona,
             'id_especialidad' => $id_especialidad
         ]);
         // whith this command i get the last inserted id

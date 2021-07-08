@@ -2,7 +2,7 @@
   <Modal>
     <ModalHeader>
       <h3 class="modal-title">
-        Diagnostico del paciente N°: P_{{ data.persona.id_persona }}
+        Editar Diagnostico del paciente N°: P_{{ data.persona.id_persona }}
       </h3>
     </ModalHeader>
     <ModalBody>
@@ -18,7 +18,7 @@
       <div class="my-4">
         <h4>Informacion Consulta</h4>
         <p>
-          Consulta N°{{ data.consulta[0].id_consulta }} <br />
+          Consulta N°: C_{{ data.consulta[0].id_consulta }} <br />
           Fecha Consulta {{ data.consulta[0].fecha_consulta }} <br />
         </p>
         <h5>Sintomas</h5>
@@ -55,6 +55,9 @@
     <ModalFooter>
       <button @click="close('Modal closed')" class="btn btn-primary">
         Cerrar
+      </button>
+      <button @click="guardar" class="btn btn-success">
+        Guardar Cambios
       </button>
       <!-- <button @click="dismiss('Modal dismissed')" class="btn btn-primary">Dismiss Modal</button> -->
     </ModalFooter>

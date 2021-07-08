@@ -28,10 +28,13 @@
 
       <div class="row mt-4">
         <div class="col-sm-9">
-          <h4 class="my-2">Sintomas <button class="btn btn-primary ml-3" @click="addSintoma">+</button></h4>          
+          <h4 class="my-2">
+            Sintomas
+            <button class="btn btn-primary ml-3" @click="addSintoma">+</button>
+          </h4>
           <div class="row">
             <div class="col col-md-9" v-for="sintoma in nuevaConsulta.sintomas">
-            <h6 class="my-2">Sintoma</h6>
+              <h6 class="my-2">Sintoma</h6>
               <select
                 class="form-control mt-2"
                 name=""
@@ -52,7 +55,10 @@
 
       <div class="row mt-4">
         <div class="col-sm-9">
-          <h4 class="my-2">Habitos <button class="btn btn-primary ml-3" @click="addHabito">+</button></h4>          
+          <h4 class="my-2">
+            Habitos
+            <button class="btn btn-primary ml-3" @click="addHabito">+</button>
+          </h4>
           <div class="row">
             <div class="col col-md-9" v-for="habito in nuevaConsulta.habitos">
               <h6 class="my-2">Habito</h6>
@@ -76,7 +82,10 @@
 
       <div class="row mt-4">
         <div class="col-sm-9">
-          <h4 class="my-2">Procedimientos <button class="btn btn-primary" @click="addProceso">+</button></h4>          
+          <h4 class="my-2">
+            Procedimientos
+            <button class="btn btn-primary" @click="addProceso">+</button>
+          </h4>
           <div class="row">
             <div class="col col-md-9" v-for="proceso in nuevaConsulta.procesos">
               <h6 class="my-2">Procedimiento</h6>
@@ -131,7 +140,6 @@ const options = {
 
 Vue.use(Toast, options);
 
-
 export default {
   components: { Modal, ModalHeader, ModalBody, ModalFooter },
   mixins: [ModalMixin],
@@ -166,11 +174,58 @@ export default {
   },
   methods: {
     async showme() {
-      this.nuevaConsulta.id_paciente = this.data.id_persona;
-      this.nuevaConsulta.especialidad = this.especialidad;
-      await axios.post("/consultas", this.nuevaConsulta);
-      this.close('Modal closed');
-      this.$toast('Nueva Consulta Registrada Exitosamente!');
+      var err = 0;
+      if (
+        this.nuevaConsulta.sintomas.length &&
+        this.especialidad &&
+        this.nuevaConsulta.habitos.length &&
+        this.nuevaConsulta.procesos.length
+      ) {
+        this.nuevaConsulta.sintomas.forEach((sintoma) => {
+          sintoma.value !== " "
+            ? console.log("ok")
+            : this.$toast.error("Debe seleccionar cada sintoma."),
+            err++;
+        });
+
+        this.nuevaConsulta.habitos.forEach((habito) => {
+          habito.value !== " "
+            ? console.log("ok")
+            : this.$toast.error("Debe seleccionar cada habito."),
+            err++;
+        });
+        this.nuevaConsulta.procesos.forEach((proceso) => {
+          proceso.value !== " " && proceso.resultado
+            ? console.log("ok")
+            : this.$toast.error(
+                "Debe seleccionar cada proceso e introducir el resultado."
+              ),
+            err++;
+        });
+        console.log(err);
+        if (err > 0) {
+          //cant procede with the database write
+          err = 0;
+        } else {
+          this.nuevaConsulta.id_paciente = this.data.id_persona;
+          this.nuevaConsulta.especialidad = this.especialidad;
+          await axios.post("/consultas", this.nuevaConsulta);
+          this.close("Modal closed");
+          this.$toast("Nueva Consulta Registrada Exitosamente!");
+        }
+      }
+      if (!this.nuevaConsulta.sintomas.length) {
+        this.$toast.error("Debe introducir por lo menos un sintoma.");
+      }
+      if (!this.nuevaConsulta.habitos.length) {
+        this.$toast.error("Debe introducir por lo menos un habito.");
+      }
+      if (!this.nuevaConsulta.procesos.length) {
+        this.$toast.error("Debe introducir por lo menos un procedimiento.");
+      }
+      if (!this.especialidad) {
+        this.$toast.error("Debe seleccionar la especialidad de la consulta.");
+      }
     },
     addSintoma: function () {
       this.nuevaConsulta.sintomas.push({ value: " " });

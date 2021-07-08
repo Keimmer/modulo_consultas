@@ -75,10 +75,10 @@
 
     </ModalBody>
     <ModalFooter>
-      <button @click="close('Modal closed')" class="btn btn-primary">
+      <button @click="close('Modal closed')" class="btn btn-danger">
         Cerrar
       </button>
-      <button @click="guardar" class="btn btn-primary">
+      <button @click="guardar" class="btn btn-success">
         Guardar Cambios
       </button>
       <!-- <button @click="dismiss('Modal dismissed')" class="btn btn-primary">Dismiss Modal</button> -->

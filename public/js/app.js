@@ -1861,7 +1861,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _TabNav_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./TabNav.vue */ "./resources/js/components/TabNav.vue");
 /* harmony import */ var _Tab_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Tab.vue */ "./resources/js/components/Tab.vue");
 /* harmony import */ var _Modals_ModalRoot_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Modals/ModalRoot.vue */ "./resources/js/components/Modals/ModalRoot.vue");
-/* harmony import */ var _Modals_services_modal_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./Modals/services/modal.service */ "./resources/js/components/Modals/services/modal.service.js");
+/* harmony import */ var _Modals_services_modal_opservice__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./Modals/services/modal.opservice */ "./resources/js/components/Modals/services/modal.opservice.js");
 /* harmony import */ var _TestModal_vue__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./TestModal.vue */ "./resources/js/components/TestModal.vue");
 /* harmony import */ var _ModalNCons_vue__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./ModalNCons.vue */ "./resources/js/components/ModalNCons.vue");
 /* harmony import */ var _ModalVerConsulta_vue__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./ModalVerConsulta.vue */ "./resources/js/components/ModalVerConsulta.vue");
@@ -1875,9 +1875,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _ModalNRecipe_vue__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./ModalNRecipe.vue */ "./resources/js/components/ModalNRecipe.vue");
 /* harmony import */ var _ModalVerRecipe_vue__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./ModalVerRecipe.vue */ "./resources/js/components/ModalVerRecipe.vue");
 /* harmony import */ var _ModalEditarRecipe_vue__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./ModalEditarRecipe.vue */ "./resources/js/components/ModalEditarRecipe.vue");
-/* harmony import */ var _PerfilPaciente_vue__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./PerfilPaciente.vue */ "./resources/js/components/PerfilPaciente.vue");
-/* harmony import */ var vue_toastification__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! vue-toastification */ "./node_modules/vue-toastification/dist/esm/index.js");
-/* harmony import */ var vue_toastification_dist_index_css__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! vue-toastification/dist/index.css */ "./node_modules/vue-toastification/dist/index.css");
+/* harmony import */ var _Modals_services_modal_service__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./Modals/services/modal.service */ "./resources/js/components/Modals/services/modal.service.js");
+/* harmony import */ var _PerfilPaciente_vue__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./PerfilPaciente.vue */ "./resources/js/components/PerfilPaciente.vue");
+/* harmony import */ var vue_toastification__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! vue-toastification */ "./node_modules/vue-toastification/dist/esm/index.js");
+/* harmony import */ var vue_toastification_dist_index_css__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! vue-toastification/dist/index.css */ "./node_modules/vue-toastification/dist/index.css");
 
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
@@ -1896,101 +1897,6 @@ function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 //
 //
 //
@@ -2348,20 +2254,20 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var options = {// You can set your default options here
 };
-Vue.use(vue_toastification__WEBPACK_IMPORTED_MODULE_19__.default, options);
+Vue.use(vue_toastification__WEBPACK_IMPORTED_MODULE_20__.default, options);
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "App",
   components: {
     TabNav: _TabNav_vue__WEBPACK_IMPORTED_MODULE_1__.default,
     Tab: _Tab_vue__WEBPACK_IMPORTED_MODULE_2__.default,
     ModalRoot: _Modals_ModalRoot_vue__WEBPACK_IMPORTED_MODULE_3__.default,
-    PerfilPaciente: _PerfilPaciente_vue__WEBPACK_IMPORTED_MODULE_18__.default
+    PerfilPaciente: _PerfilPaciente_vue__WEBPACK_IMPORTED_MODULE_19__.default
   },
   data: function data() {
     return {
+      cedula: "",
       data: {
-        key: "",
-        cedula: ""
+        key: ""
       },
       selected: "Pacientes",
       persona: {
@@ -2443,6 +2349,31 @@ Vue.use(vue_toastification__WEBPACK_IMPORTED_MODULE_19__.default, options);
       selectedRecipe: ""
     };
   },
+  created: function created() {
+    var _this = this;
+
+    _Modals_services_modal_opservice__WEBPACK_IMPORTED_MODULE_4__.default.$on("editcons", function (_ref) {
+      var data = _ref.data;
+
+      _this.editarConsulta();
+    });
+    _Modals_services_modal_opservice__WEBPACK_IMPORTED_MODULE_4__.default.$on("editdiag", function (_ref2) {
+      var data = _ref2.data;
+
+      _this.editarDiagnostico();
+    });
+    _Modals_services_modal_opservice__WEBPACK_IMPORTED_MODULE_4__.default.$on("edittrat", function (_ref3) {
+      var data = _ref3.data;
+
+      _this.editarTratamiento();
+    });
+    _Modals_services_modal_opservice__WEBPACK_IMPORTED_MODULE_4__.default.$on("editrec", function (_ref4) {
+      var data = _ref4.data;
+
+      _this.editarRecipe();
+    });
+    this.listarPers();
+  },
   methods: {
     divDragOver: function divDragOver(e, i) {
       var _this$$refs = _slicedToArray(this.$refs["ref_" + i], 1),
@@ -2453,7 +2384,7 @@ Vue.use(vue_toastification__WEBPACK_IMPORTED_MODULE_19__.default, options);
       console.log(this.top);
     },
     selectRowConsulta: function selectRowConsulta(consulta) {
-      var _this = this;
+      var _this2 = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
         var resCons;
@@ -2462,21 +2393,21 @@ Vue.use(vue_toastification__WEBPACK_IMPORTED_MODULE_19__.default, options);
             switch (_context.prev = _context.next) {
               case 0:
                 /* some styling positions */
-                console.log(_this.top);
+                console.log(_this2.top);
                 /* ////////////////////// */
 
-                _this.selectedCons = consulta.id_consulta;
+                _this2.selectedCons = consulta.id_consulta;
                 _context.next = 4;
                 return axios.get("/consultas", {
                   params: {
-                    selectedCons: _this.selectedCons
+                    selectedCons: _this2.selectedCons
                   }
                 });
 
               case 4:
                 resCons = _context.sent;
-                _this.consulta = resCons.data;
-                console.log(_this.consulta);
+                _this2.consulta = resCons.data;
+                console.log(_this2.consulta);
 
               case 7:
               case "end":
@@ -2498,14 +2429,14 @@ Vue.use(vue_toastification__WEBPACK_IMPORTED_MODULE_19__.default, options);
     },
     addModal: function addModal() {
       if (this.selectedPersona) {
-        _Modals_services_modal_service__WEBPACK_IMPORTED_MODULE_4__.default.open(_TestModal_vue__WEBPACK_IMPORTED_MODULE_5__.default);
-        _Modals_services_modal_service__WEBPACK_IMPORTED_MODULE_4__.default.recievedata(this.persona);
+        _Modals_services_modal_service__WEBPACK_IMPORTED_MODULE_18__.default.open(_TestModal_vue__WEBPACK_IMPORTED_MODULE_5__.default);
+        _Modals_services_modal_service__WEBPACK_IMPORTED_MODULE_18__.default.recievedata(this.persona);
       } else {
         this.$toast("Debe Seleccionar Un Paciente de la lista");
       }
     },
     nuevaConsulta: function nuevaConsulta() {
-      var _this2 = this;
+      var _this3 = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2() {
         var res, resSint, resHab, resProc;
@@ -2518,31 +2449,31 @@ Vue.use(vue_toastification__WEBPACK_IMPORTED_MODULE_19__.default, options);
 
               case 2:
                 res = _context2.sent;
-                _this2.especialidades = res.data;
+                _this3.especialidades = res.data;
                 _context2.next = 6;
                 return axios.get("/sintomas");
 
               case 6:
                 resSint = _context2.sent;
-                _this2.sintomas = resSint.data;
+                _this3.sintomas = resSint.data;
                 _context2.next = 10;
                 return axios.get("/habitos");
 
               case 10:
                 resHab = _context2.sent;
-                _this2.habitos = resHab.data;
+                _this3.habitos = resHab.data;
                 _context2.next = 14;
                 return axios.get("/procesos");
 
               case 14:
                 resProc = _context2.sent;
-                _this2.procesos = resProc.data;
-                _Modals_services_modal_service__WEBPACK_IMPORTED_MODULE_4__.default.open(_ModalNCons_vue__WEBPACK_IMPORTED_MODULE_6__.default);
-                _Modals_services_modal_service__WEBPACK_IMPORTED_MODULE_4__.default.recievedata(_this2.persona);
-                _Modals_services_modal_service__WEBPACK_IMPORTED_MODULE_4__.default.recieveEspecialidad(_this2.especialidades);
-                _Modals_services_modal_service__WEBPACK_IMPORTED_MODULE_4__.default.recieveSintomas(_this2.sintomas);
-                _Modals_services_modal_service__WEBPACK_IMPORTED_MODULE_4__.default.recieveHabitos(_this2.habitos);
-                _Modals_services_modal_service__WEBPACK_IMPORTED_MODULE_4__.default.recieveProcesos(_this2.procesos);
+                _this3.procesos = resProc.data;
+                _Modals_services_modal_service__WEBPACK_IMPORTED_MODULE_18__.default.open(_ModalNCons_vue__WEBPACK_IMPORTED_MODULE_6__.default);
+                _Modals_services_modal_service__WEBPACK_IMPORTED_MODULE_18__.default.recievedata(_this3.persona);
+                _Modals_services_modal_service__WEBPACK_IMPORTED_MODULE_18__.default.recieveEspecialidad(_this3.especialidades);
+                _Modals_services_modal_service__WEBPACK_IMPORTED_MODULE_18__.default.recieveSintomas(_this3.sintomas);
+                _Modals_services_modal_service__WEBPACK_IMPORTED_MODULE_18__.default.recieveHabitos(_this3.habitos);
+                _Modals_services_modal_service__WEBPACK_IMPORTED_MODULE_18__.default.recieveProcesos(_this3.procesos);
 
               case 22:
               case "end":
@@ -2553,13 +2484,13 @@ Vue.use(vue_toastification__WEBPACK_IMPORTED_MODULE_19__.default, options);
       }))();
     },
     verConsulta: function verConsulta() {
-      _Modals_services_modal_service__WEBPACK_IMPORTED_MODULE_4__.default.open(_ModalVerConsulta_vue__WEBPACK_IMPORTED_MODULE_7__.default);
+      _Modals_services_modal_service__WEBPACK_IMPORTED_MODULE_18__.default.open(_ModalVerConsulta_vue__WEBPACK_IMPORTED_MODULE_7__.default);
       this.verConsultaObj.consulta = this.consulta;
       this.verConsultaObj.persona = this.persona;
-      _Modals_services_modal_service__WEBPACK_IMPORTED_MODULE_4__.default.recievedata(this.verConsultaObj);
+      _Modals_services_modal_service__WEBPACK_IMPORTED_MODULE_18__.default.recievedata(this.verConsultaObj);
     },
     editarConsulta: function editarConsulta() {
-      var _this3 = this;
+      var _this4 = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee3() {
         var resProc;
@@ -2567,18 +2498,19 @@ Vue.use(vue_toastification__WEBPACK_IMPORTED_MODULE_19__.default, options);
           while (1) {
             switch (_context3.prev = _context3.next) {
               case 0:
-                _Modals_services_modal_service__WEBPACK_IMPORTED_MODULE_4__.default.open(_ModalEditConsulta_vue__WEBPACK_IMPORTED_MODULE_8__.default);
-                _this3.verConsultaObj.consulta = _this3.consulta;
-                _this3.verConsultaObj.persona = _this3.persona;
-                _context3.next = 5;
+                console.log("trying");
+                _Modals_services_modal_service__WEBPACK_IMPORTED_MODULE_18__.default.open(_ModalEditConsulta_vue__WEBPACK_IMPORTED_MODULE_8__.default);
+                _this4.verConsultaObj.consulta = _this4.consulta;
+                _this4.verConsultaObj.persona = _this4.persona;
+                _context3.next = 6;
                 return axios.get("/procesos");
 
-              case 5:
+              case 6:
                 resProc = _context3.sent;
-                _this3.verConsultaObj.procesos = resProc.data;
-                _Modals_services_modal_service__WEBPACK_IMPORTED_MODULE_4__.default.recievedata(_this3.verConsultaObj);
+                _this4.verConsultaObj.procesos = resProc.data;
+                _Modals_services_modal_service__WEBPACK_IMPORTED_MODULE_18__.default.recievedata(_this4.verConsultaObj);
 
-              case 8:
+              case 9:
               case "end":
                 return _context3.stop();
             }
@@ -2587,22 +2519,22 @@ Vue.use(vue_toastification__WEBPACK_IMPORTED_MODULE_19__.default, options);
       }))();
     },
     nuevoDiagnostico: function nuevoDiagnostico() {
-      var _this4 = this;
+      var _this5 = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee4() {
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee4$(_context4) {
           while (1) {
             switch (_context4.prev = _context4.next) {
               case 0:
-                _Modals_services_modal_service__WEBPACK_IMPORTED_MODULE_4__.default.open(_ModalNDiagnostico_vue__WEBPACK_IMPORTED_MODULE_9__.default);
-                _this4.verConsultaObj.consulta = _this4.consulta;
-                _this4.verConsultaObj.persona = _this4.persona;
+                _Modals_services_modal_service__WEBPACK_IMPORTED_MODULE_18__.default.open(_ModalNDiagnostico_vue__WEBPACK_IMPORTED_MODULE_9__.default);
+                _this5.verConsultaObj.consulta = _this5.consulta;
+                _this5.verConsultaObj.persona = _this5.persona;
                 _context4.next = 5;
                 return axios.get("/patologias");
 
               case 5:
-                _this4.verConsultaObj.patologias = _context4.sent;
-                _Modals_services_modal_service__WEBPACK_IMPORTED_MODULE_4__.default.recievedata(_this4.verConsultaObj);
+                _this5.verConsultaObj.patologias = _context4.sent;
+                _Modals_services_modal_service__WEBPACK_IMPORTED_MODULE_18__.default.recievedata(_this5.verConsultaObj);
 
               case 7:
               case "end":
@@ -2613,36 +2545,36 @@ Vue.use(vue_toastification__WEBPACK_IMPORTED_MODULE_19__.default, options);
       }))();
     },
     verDiagnostico: function verDiagnostico() {
-      _Modals_services_modal_service__WEBPACK_IMPORTED_MODULE_4__.default.open(_ModalVerDiagnostico_vue__WEBPACK_IMPORTED_MODULE_10__.default);
+      _Modals_services_modal_service__WEBPACK_IMPORTED_MODULE_18__.default.open(_ModalVerDiagnostico_vue__WEBPACK_IMPORTED_MODULE_10__.default);
       this.verDiagObj.consulta = this.consulta;
       this.verDiagObj.persona = this.persona;
       this.verDiagObj.diagnostico = this.diagnostico;
-      _Modals_services_modal_service__WEBPACK_IMPORTED_MODULE_4__.default.recievedata(this.verDiagObj);
+      _Modals_services_modal_service__WEBPACK_IMPORTED_MODULE_18__.default.recievedata(this.verDiagObj);
     },
     editarDiagnostico: function editarDiagnostico() {
-      _Modals_services_modal_service__WEBPACK_IMPORTED_MODULE_4__.default.open(_ModalEditDiagnostico_vue__WEBPACK_IMPORTED_MODULE_11__.default);
+      _Modals_services_modal_service__WEBPACK_IMPORTED_MODULE_18__.default.open(_ModalEditDiagnostico_vue__WEBPACK_IMPORTED_MODULE_11__.default);
       this.verDiagObj.consulta = this.consulta;
       this.verDiagObj.persona = this.persona;
       this.verDiagObj.diagnostico = this.diagnostico;
-      _Modals_services_modal_service__WEBPACK_IMPORTED_MODULE_4__.default.recievedata(this.verDiagObj);
+      _Modals_services_modal_service__WEBPACK_IMPORTED_MODULE_18__.default.recievedata(this.verDiagObj);
     },
     nuevoTratamiento: function nuevoTratamiento() {
-      var _this5 = this;
+      var _this6 = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee5() {
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee5$(_context5) {
           while (1) {
             switch (_context5.prev = _context5.next) {
               case 0:
-                _Modals_services_modal_service__WEBPACK_IMPORTED_MODULE_4__.default.open(_ModalNTrat_vue__WEBPACK_IMPORTED_MODULE_12__.default);
-                _this5.nuevoTratObj.persona = _this5.persona;
-                _this5.nuevoTratObj.diagnostico = _this5.diagnostico;
+                _Modals_services_modal_service__WEBPACK_IMPORTED_MODULE_18__.default.open(_ModalNTrat_vue__WEBPACK_IMPORTED_MODULE_12__.default);
+                _this6.nuevoTratObj.persona = _this6.persona;
+                _this6.nuevoTratObj.diagnostico = _this6.diagnostico;
                 _context5.next = 5;
                 return axios.get("/alltrat");
 
               case 5:
-                _this5.nuevoTratObj.tipos_trat = _context5.sent;
-                _Modals_services_modal_service__WEBPACK_IMPORTED_MODULE_4__.default.recievedata(_this5.nuevoTratObj);
+                _this6.nuevoTratObj.tipos_trat = _context5.sent;
+                _Modals_services_modal_service__WEBPACK_IMPORTED_MODULE_18__.default.recievedata(_this6.nuevoTratObj);
 
               case 7:
               case "end":
@@ -2653,35 +2585,35 @@ Vue.use(vue_toastification__WEBPACK_IMPORTED_MODULE_19__.default, options);
       }))();
     },
     verTratamiento: function verTratamiento() {
-      _Modals_services_modal_service__WEBPACK_IMPORTED_MODULE_4__.default.open(_ModalVerTratamiento_vue__WEBPACK_IMPORTED_MODULE_13__.default);
+      _Modals_services_modal_service__WEBPACK_IMPORTED_MODULE_18__.default.open(_ModalVerTratamiento_vue__WEBPACK_IMPORTED_MODULE_13__.default);
       this.nuevoRecipeObj.persona = this.persona;
       this.nuevoRecipeObj.tratamiento = this.tratamiento;
-      _Modals_services_modal_service__WEBPACK_IMPORTED_MODULE_4__.default.recievedata(this.nuevoRecipeObj);
+      _Modals_services_modal_service__WEBPACK_IMPORTED_MODULE_18__.default.recievedata(this.nuevoRecipeObj);
     },
     editarTratamiento: function editarTratamiento() {
-      _Modals_services_modal_service__WEBPACK_IMPORTED_MODULE_4__.default.open(_ModalEditTrat_vue__WEBPACK_IMPORTED_MODULE_14__.default);
+      _Modals_services_modal_service__WEBPACK_IMPORTED_MODULE_18__.default.open(_ModalEditTrat_vue__WEBPACK_IMPORTED_MODULE_14__.default);
       this.nuevoRecipeObj.persona = this.persona;
       this.nuevoRecipeObj.tratamiento = this.tratamiento;
-      _Modals_services_modal_service__WEBPACK_IMPORTED_MODULE_4__.default.recievedata(this.nuevoRecipeObj);
+      _Modals_services_modal_service__WEBPACK_IMPORTED_MODULE_18__.default.recievedata(this.nuevoRecipeObj);
     },
     nuevoRecipe: function nuevoRecipe() {
-      var _this6 = this;
+      var _this7 = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee6() {
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee6$(_context6) {
           while (1) {
             switch (_context6.prev = _context6.next) {
               case 0:
-                _Modals_services_modal_service__WEBPACK_IMPORTED_MODULE_4__.default.open(_ModalNRecipe_vue__WEBPACK_IMPORTED_MODULE_15__.default);
-                _this6.nuevoRecipeObj.persona = _this6.persona;
-                _this6.nuevoRecipeObj.tratamiento = _this6.tratamiento;
+                _Modals_services_modal_service__WEBPACK_IMPORTED_MODULE_18__.default.open(_ModalNRecipe_vue__WEBPACK_IMPORTED_MODULE_15__.default);
+                _this7.nuevoRecipeObj.persona = _this7.persona;
+                _this7.nuevoRecipeObj.tratamiento = _this7.tratamiento;
                 _context6.next = 5;
                 return axios.get("/medicamentos");
 
               case 5:
-                _this6.nuevoRecipeObj.medicamentos = _context6.sent;
-                console.log(_this6.tratamiento);
-                _Modals_services_modal_service__WEBPACK_IMPORTED_MODULE_4__.default.recievedata(_this6.nuevoRecipeObj);
+                _this7.nuevoRecipeObj.medicamentos = _context6.sent;
+                console.log(_this7.tratamiento);
+                _Modals_services_modal_service__WEBPACK_IMPORTED_MODULE_18__.default.recievedata(_this7.nuevoRecipeObj);
 
               case 8:
               case "end":
@@ -2691,28 +2623,28 @@ Vue.use(vue_toastification__WEBPACK_IMPORTED_MODULE_19__.default, options);
         }, _callee6);
       }))();
     },
-    verRecipe: function verRecipe(recipe_id) {
-      var _this7 = this;
+    verRecipe: function verRecipe() {
+      var _this8 = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee7() {
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee7$(_context7) {
           while (1) {
             switch (_context7.prev = _context7.next) {
               case 0:
-                _Modals_services_modal_service__WEBPACK_IMPORTED_MODULE_4__.default.open(_ModalVerRecipe_vue__WEBPACK_IMPORTED_MODULE_16__.default);
-                _this7.verRecipeObj.persona = _this7.persona;
-                _this7.verRecipeObj.tratamiento = _this7.tratamiento;
-                _this7.verRecipeObj.recipe = _this7.recipe;
+                _Modals_services_modal_service__WEBPACK_IMPORTED_MODULE_18__.default.open(_ModalVerRecipe_vue__WEBPACK_IMPORTED_MODULE_16__.default);
+                _this8.verRecipeObj.persona = _this8.persona;
+                _this8.verRecipeObj.tratamiento = _this8.tratamiento;
+                _this8.verRecipeObj.recipe = _this8.recipe;
                 _context7.next = 6;
                 return axios.get("/recipes", {
                   params: {
-                    id_recipe: recipe_id
+                    id_recipe: _this8.selectedRecipe
                   }
                 });
 
               case 6:
-                _this7.verRecipeObj.medicamentos = _context7.sent;
-                _Modals_services_modal_service__WEBPACK_IMPORTED_MODULE_4__.default.recievedata(_this7.verRecipeObj);
+                _this8.verRecipeObj.medicamentos = _context7.sent;
+                _Modals_services_modal_service__WEBPACK_IMPORTED_MODULE_18__.default.recievedata(_this8.verRecipeObj);
 
               case 8:
               case "end":
@@ -2722,33 +2654,33 @@ Vue.use(vue_toastification__WEBPACK_IMPORTED_MODULE_19__.default, options);
         }, _callee7);
       }))();
     },
-    editarRecipe: function editarRecipe(recipe_id) {
-      var _this8 = this;
+    editarRecipe: function editarRecipe() {
+      var _this9 = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee8() {
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee8$(_context8) {
           while (1) {
             switch (_context8.prev = _context8.next) {
               case 0:
-                _Modals_services_modal_service__WEBPACK_IMPORTED_MODULE_4__.default.open(_ModalEditarRecipe_vue__WEBPACK_IMPORTED_MODULE_17__.default);
-                _this8.verRecipeObj.persona = _this8.persona;
-                _this8.verRecipeObj.tratamiento = _this8.tratamiento;
-                _this8.verRecipeObj.recipe = _this8.recipe;
+                _Modals_services_modal_service__WEBPACK_IMPORTED_MODULE_18__.default.open(_ModalEditarRecipe_vue__WEBPACK_IMPORTED_MODULE_17__.default);
+                _this9.verRecipeObj.persona = _this9.persona;
+                _this9.verRecipeObj.tratamiento = _this9.tratamiento;
+                _this9.verRecipeObj.recipe = _this9.recipe;
                 _context8.next = 6;
                 return axios.get("/recipes", {
                   params: {
-                    id_recipe: recipe_id
+                    id_recipe: _this9.selectedRecipe
                   }
                 });
 
               case 6:
-                _this8.verRecipeObj.medicamentos = _context8.sent;
+                _this9.verRecipeObj.medicamentos = _context8.sent;
                 _context8.next = 9;
                 return axios.get("/medicamentos");
 
               case 9:
-                _this8.verRecipeObj.addMedicamentos = _context8.sent;
-                _Modals_services_modal_service__WEBPACK_IMPORTED_MODULE_4__.default.recievedata(_this8.verRecipeObj);
+                _this9.verRecipeObj.addMedicamentos = _context8.sent;
+                _Modals_services_modal_service__WEBPACK_IMPORTED_MODULE_18__.default.recievedata(_this9.verRecipeObj);
 
               case 11:
               case "end":
@@ -2758,34 +2690,16 @@ Vue.use(vue_toastification__WEBPACK_IMPORTED_MODULE_19__.default, options);
         }, _callee8);
       }))();
     },
-    BuscarCedulaNombre: function BuscarCedulaNombre(event) {
-      console.log(event.target.value);
-
-      if (this.cednom == 1) {
-        this.porCedula = true;
-        this.porNombre = false;
-      }
-
-      if (this.cednom == 2) {
-        this.porCedula = false;
-        this.porNombre = true;
-      }
-    },
     selectRow: function selectRow(persona) {
       this.selectedUser = persona.id_persona;
       this.persona = persona;
       this.selectedPersona = persona.id_persona;
       console.log(this.selectedPersona);
     },
-    abrir: function abrir() {
-      this.viewConsulta = true, this.vista = 1;
-    },
     selectRowRecipe: function selectRowRecipe(recipe) {
       console.log(recipe);
       this.selectedRecipe = recipe.id_recipe;
       this.recipe = recipe;
-    },
-    onChange: function onChange() {//
     },
     seleccionar: function seleccionar(id_pers) {
       this.id_pers = id_pers;
@@ -2844,13 +2758,11 @@ Vue.use(vue_toastification__WEBPACK_IMPORTED_MODULE_19__.default, options);
       }
     },
     //listar Personas
-    created: function created() {
-      this.listarPers();
-    },
+    created: function created() {},
 
     /* Listar Tratamientos */
     listarTrat: function listarTrat() {
-      var _this9 = this;
+      var _this10 = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee9() {
         var res;
@@ -2861,16 +2773,16 @@ Vue.use(vue_toastification__WEBPACK_IMPORTED_MODULE_19__.default, options);
                 _context9.next = 2;
                 return axios.get("/tratamientos", {
                   params: {
-                    selectedDiag: _this9.selectedDiag
+                    selectedDiag: _this10.selectedDiag
                   }
                 });
 
               case 2:
                 res = _context9.sent;
-                _this9.tratamientos = res.data;
+                _this10.tratamientos = res.data;
 
-                if (_this9.tratamientos.length < 1) {
-                  _this9.tratamientos = false;
+                if (_this10.tratamientos.length < 1) {
+                  _this10.tratamientos = false;
                 }
 
               case 5:
@@ -2884,7 +2796,7 @@ Vue.use(vue_toastification__WEBPACK_IMPORTED_MODULE_19__.default, options);
 
     /* Listar Recipes */
     listarRecipes: function listarRecipes() {
-      var _this10 = this;
+      var _this11 = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee10() {
         var res;
@@ -2895,16 +2807,16 @@ Vue.use(vue_toastification__WEBPACK_IMPORTED_MODULE_19__.default, options);
                 _context10.next = 2;
                 return axios.get("/recipes", {
                   params: {
-                    id_tratamiento: _this10.selectedTrat
+                    id_tratamiento: _this11.selectedTrat
                   }
                 });
 
               case 2:
                 res = _context10.sent;
-                _this10.recipes = res.data;
+                _this11.recipes = res.data;
 
-                if (_this10.recipes.length < 1) {
-                  _this10.recipes = false;
+                if (_this11.recipes.length < 1) {
+                  _this11.recipes = false;
                 }
 
               case 5:
@@ -2918,7 +2830,7 @@ Vue.use(vue_toastification__WEBPACK_IMPORTED_MODULE_19__.default, options);
 
     /* listar personas sin filtrar por cedula */
     listarPers: function listarPers() {
-      var _this11 = this;
+      var _this12 = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee11() {
         var res;
@@ -2931,7 +2843,7 @@ Vue.use(vue_toastification__WEBPACK_IMPORTED_MODULE_19__.default, options);
 
               case 2:
                 res = _context11.sent;
-                _this11.personas = res.data;
+                _this12.personas = res.data;
 
               case 4:
               case "end":
@@ -2944,7 +2856,7 @@ Vue.use(vue_toastification__WEBPACK_IMPORTED_MODULE_19__.default, options);
 
     /* listar personas filtrando por cedula */
     listarPer: function listarPer() {
-      var _this12 = this;
+      var _this13 = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee12() {
         var res;
@@ -2955,13 +2867,13 @@ Vue.use(vue_toastification__WEBPACK_IMPORTED_MODULE_19__.default, options);
                 _context12.next = 2;
                 return axios.get("/personas", {
                   params: {
-                    cedula: _this12.perced
+                    cedula: _this13.perced
                   }
                 });
 
               case 2:
                 res = _context12.sent;
-                _this12.personas = res.data;
+                _this13.personas = res.data;
 
               case 4:
               case "end":
@@ -2973,7 +2885,7 @@ Vue.use(vue_toastification__WEBPACK_IMPORTED_MODULE_19__.default, options);
     },
     //listar Consultas
     listarCons: function listarCons() {
-      var _this13 = this;
+      var _this14 = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee13() {
         var res;
@@ -2984,16 +2896,16 @@ Vue.use(vue_toastification__WEBPACK_IMPORTED_MODULE_19__.default, options);
                 _context13.next = 2;
                 return axios.get("/consultas", {
                   params: {
-                    selectedPersona: _this13.selectedPersona
+                    selectedPersona: _this14.selectedPersona
                   }
                 });
 
               case 2:
                 res = _context13.sent;
-                _this13.consultas = res.data;
+                _this14.consultas = res.data;
 
-                if (_this13.consultas.length < 1) {
-                  _this13.consultas = false;
+                if (_this14.consultas.length < 1) {
+                  _this14.consultas = false;
                 }
 
               case 5:
@@ -3006,7 +2918,7 @@ Vue.use(vue_toastification__WEBPACK_IMPORTED_MODULE_19__.default, options);
     },
     //listar Diagnosticos
     listarDiag: function listarDiag() {
-      var _this14 = this;
+      var _this15 = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee14() {
         var res;
@@ -3017,16 +2929,16 @@ Vue.use(vue_toastification__WEBPACK_IMPORTED_MODULE_19__.default, options);
                 _context14.next = 2;
                 return axios.get("/diagnosticos", {
                   params: {
-                    selectedConsulta: _this14.selectedCons
+                    selectedConsulta: _this15.selectedCons
                   }
                 });
 
               case 2:
                 res = _context14.sent;
-                _this14.diagnosticos = res.data;
+                _this15.diagnosticos = res.data;
 
-                if (_this14.diagnosticos.length < 1) {
-                  _this14.diagnosticos = false;
+                if (_this15.diagnosticos.length < 1) {
+                  _this15.diagnosticos = false;
                 }
 
               case 5:
@@ -3039,7 +2951,7 @@ Vue.use(vue_toastification__WEBPACK_IMPORTED_MODULE_19__.default, options);
     },
     // metodos modal
     guardar: function guardar() {
-      var _this15 = this;
+      var _this16 = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee15() {
         var res, _res;
@@ -3048,14 +2960,14 @@ Vue.use(vue_toastification__WEBPACK_IMPORTED_MODULE_19__.default, options);
           while (1) {
             switch (_context15.prev = _context15.next) {
               case 0:
-                if (!_this15.modificar) {
+                if (!_this16.modificar) {
                   _context15.next = 7;
                   break;
                 }
 
-                console.log(_this15.persona.id_persona, _this15.persona);
+                console.log(_this16.persona.id_persona, _this16.persona);
                 _context15.next = 4;
-                return axios.put("/personas/" + _this15.persona.id_persona, _this15.persona);
+                return axios.put("/personas/" + _this16.persona.id_persona, _this16.persona);
 
               case 4:
                 res = _context15.sent;
@@ -3064,15 +2976,15 @@ Vue.use(vue_toastification__WEBPACK_IMPORTED_MODULE_19__.default, options);
 
               case 7:
                 _context15.next = 9;
-                return axios.post("/personas/", _this15.persona);
+                return axios.post("/personas/", _this16.persona);
 
               case 9:
                 _res = _context15.sent;
 
               case 10:
-                _this15.cerrarModal();
+                _this16.cerrarModal();
 
-                _this15.listarPer();
+                _this16.listarPer();
 
               case 12:
               case "end":
@@ -3083,7 +2995,7 @@ Vue.use(vue_toastification__WEBPACK_IMPORTED_MODULE_19__.default, options);
       }))();
     },
     eliminar: function eliminar(id_persona) {
-      var _this16 = this;
+      var _this17 = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee16() {
         var res;
@@ -3098,7 +3010,7 @@ Vue.use(vue_toastification__WEBPACK_IMPORTED_MODULE_19__.default, options);
               case 3:
                 res = _context16.sent;
 
-                _this16.listarPer();
+                _this17.listarPer();
 
               case 5:
               case "end":
@@ -3109,7 +3021,7 @@ Vue.use(vue_toastification__WEBPACK_IMPORTED_MODULE_19__.default, options);
       }))();
     },
     seleccionarMedicamentos: function seleccionarMedicamentos() {
-      var _this17 = this;
+      var _this18 = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee17() {
         var res;
@@ -3122,7 +3034,7 @@ Vue.use(vue_toastification__WEBPACK_IMPORTED_MODULE_19__.default, options);
 
               case 2:
                 res = _context17.sent;
-                _this17.medicamentoss = res.data;
+                _this18.medicamentoss = res.data;
 
               case 4:
               case "end":
@@ -3664,6 +3576,9 @@ function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
+//
+//
+//
 //
 //
 //
@@ -4386,6 +4301,15 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -4440,21 +4364,71 @@ Vue.use(vue_toastification__WEBPACK_IMPORTED_MODULE_6__.default, options);
       var _this = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
+        var err;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
+                err = 0;
+
+                if (!(_this.nuevaConsulta.sintomas.length && _this.especialidad && _this.nuevaConsulta.habitos.length && _this.nuevaConsulta.procesos.length)) {
+                  _context.next = 16;
+                  break;
+                }
+
+                _this.nuevaConsulta.sintomas.forEach(function (sintoma) {
+                  sintoma.value !== " " ? console.log("ok") : _this.$toast.error("Debe seleccionar cada sintoma."), err++;
+                });
+
+                _this.nuevaConsulta.habitos.forEach(function (habito) {
+                  habito.value !== " " ? console.log("ok") : _this.$toast.error("Debe seleccionar cada habito."), err++;
+                });
+
+                _this.nuevaConsulta.procesos.forEach(function (proceso) {
+                  proceso.value !== " " && proceso.resultado ? console.log("ok") : _this.$toast.error("Debe seleccionar cada proceso e introducir el resultado."), err++;
+                });
+
+                console.log(err);
+
+                if (!(err > 0)) {
+                  _context.next = 10;
+                  break;
+                }
+
+                //cant procede with the database write
+                err = 0;
+                _context.next = 16;
+                break;
+
+              case 10:
                 _this.nuevaConsulta.id_paciente = _this.data.id_persona;
                 _this.nuevaConsulta.especialidad = _this.especialidad;
-                _context.next = 4;
+                _context.next = 14;
                 return axios.post("/consultas", _this.nuevaConsulta);
 
-              case 4:
-                _this.close('Modal closed');
+              case 14:
+                _this.close("Modal closed");
 
-                _this.$toast('Nueva Consulta Registrada Exitosamente!');
+                _this.$toast("Nueva Consulta Registrada Exitosamente!");
 
-              case 6:
+              case 16:
+                if (!_this.nuevaConsulta.sintomas.length) {
+                  _this.$toast.error("Debe introducir por lo menos un sintoma.");
+                }
+
+                if (!_this.nuevaConsulta.habitos.length) {
+                  _this.$toast.error("Debe introducir por lo menos un habito.");
+                }
+
+                if (!_this.nuevaConsulta.procesos.length) {
+                  _this.$toast.error("Debe introducir por lo menos un procedimiento.");
+                }
+
+                if (!_this.especialidad) {
+                  _this.$toast.error("Debe seleccionar la especialidad de la consulta.");
+                }
+
+              case 20:
               case "end":
                 return _context.stop();
             }
@@ -4796,6 +4770,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
 
 
 
@@ -4848,21 +4825,51 @@ Vue.use(vue_toastification__WEBPACK_IMPORTED_MODULE_6__.default, options);
       var _this = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
+        var err;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
+                err = 0;
+
+                if (!_this.nuevoRecipe.medicamentosInd.length) {
+                  _context.next = 12;
+                  break;
+                }
+
+                _this.nuevoRecipe.medicamentosInd.forEach(function (medicamento) {
+                  if (medicamento.value !== " " && medicamento.indicaciones) {
+                    console.log("ok");
+                  } else {
+                    _this.$toast.error("Cada medicamento debe estar seleccionado y tener las indicaciones correspondientes.");
+
+                    err++;
+                  }
+                });
+
+                if (!(err == 0)) {
+                  _context.next = 10;
+                  break;
+                }
+
                 _this.nuevoRecipe.id_tratamiento = _this.data.tratamiento.id_tratamientos;
                 console.log(_this.nuevoRecipe);
-                _context.next = 4;
+                _context.next = 8;
                 return axios.post("/recipes", _this.nuevoRecipe);
 
-              case 4:
+              case 8:
                 _this.close("Modal closed");
 
-                _this.$toast('Nuevo Recipe Registrado Exitosamente!');
+                _this.$toast("Nuevo Recipe Registrado Exitosamente!");
 
-              case 6:
+              case 10:
+                _context.next = 13;
+                break;
+
+              case 12:
+                _this.$toast.error("Debe agregar un medicamento como minimo.");
+
+              case 13:
               case "end":
                 return _context.stop();
             }
@@ -4917,6 +4924,19 @@ function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -5099,58 +5119,89 @@ Vue.use(vue_toastification__WEBPACK_IMPORTED_MODULE_10__.default, options);
             switch (_context.prev = _context.next) {
               case 0:
                 if (!(_this.nuevoTratamiento.nombre_tratamiento && _this.nuevoTratamiento.medico && _this.fecha_inicio && _this.fecha_fin && _this.nuevoTratamiento.objetivo && _this.nuevoTratamiento.riesgos)) {
-                  _context.next = 13;
+                  _context.next = 19;
                   break;
                 }
 
+                if (!(_this.fecha_inicio && _this.fecha_fin)) {
+                  _context.next = 19;
+                  break;
+                }
+
+                res = moment__WEBPACK_IMPORTED_MODULE_8___default()(_this.fecha_fin).isBetween(_this.fecha_inicio, moment__WEBPACK_IMPORTED_MODULE_8___default()(_this.fecha_inicio).add(5, "days"));
+
+                if (res) {
+                  _context.next = 7;
+                  break;
+                }
+
+                _this.$toast.error("La duración del tratamiento debe ser de maximo 5 días");
+
+                _context.next = 19;
+                break;
+
+              case 7:
                 _this.nuevoTratamiento.fecha_inicio = _this.fecha_inicio;
                 _this.nuevoTratamiento.fecha_fin = _this.fecha_fin;
                 _this.nuevoTratamiento.id_diagnostico = _this.data.diagnostico.id_diagnosticos;
-                _context.next = 6;
+                _context.next = 12;
                 return axios.get("/getmed", {
                   params: {
                     nombre: _this.nuevoTratamiento.medico
                   }
                 });
 
-              case 6:
+              case 12:
                 res = _context.sent;
                 _this.nuevoTratamiento.id_medico = res.data;
                 console.log(_this.nuevoTratamiento);
-                _context.next = 11;
+                _context.next = 17;
                 return axios.post("/tratamientos", _this.nuevoTratamiento);
 
-              case 11:
+              case 17:
                 _this.close("Modal closed");
 
                 _this.$toast("Nuevo Tratamiento Guardado Exitosamente!");
 
-              case 13:
+              case 19:
                 if (!_this.nuevoTratamiento.nombre_tratamiento) {
-                  _this.$toast.error('El Tipo de Tratamiento es obligatorio.');
+                  _this.$toast.error("El Tipo de Tratamiento es obligatorio.");
                 }
 
                 if (!_this.nuevoTratamiento.medico) {
-                  _this.$toast.error('El medico para el tratamiento es obligatorio.');
+                  _this.$toast.error("El medico para el tratamiento es obligatorio.");
                 }
 
                 if (!_this.fecha_inicio) {
-                  _this.$toast.error('La fecha de inicio del tratamiento es obligatoria.');
+                  //debe ser una semana entre las fechas maximo
+                  _this.$toast.error("La fecha de inicio del tratamiento es obligatoria.");
                 }
 
                 if (!_this.fecha_fin) {
-                  _this.$toast.error('La fecha final del tratamiento es obligatoria.');
+                  _this.$toast.error("La fecha final del tratamiento es obligatoria.");
                 }
+                /* if (this.fecha_inicio && this.fecha_fin) {
+                  var res = moment(this.fecha_fin).isBetween(
+                    this.fecha_inicio,
+                    moment(this.fecha_inicio).add(5, "days")
+                  );
+                  if (!res) {
+                    this.$toast.error(
+                      "La duración del tratamiento debe ser de maximo 5 días"
+                    );
+                  }
+                } */
+
 
                 if (!_this.nuevoTratamiento.objetivo) {
-                  _this.$toast.error('El objetivo del tratamiento es obligatorio.');
+                  _this.$toast.error("El objetivo del tratamiento es obligatorio.");
                 }
 
                 if (!_this.nuevoTratamiento.riesgos) {
-                  _this.$toast.error('Los posibles riesgos del tratamiento son obligatorios.');
+                  _this.$toast.error("Los posibles riesgos del tratamiento son obligatorios.");
                 }
 
-              case 19:
+              case 25:
               case "end":
                 return _context.stop();
             }
@@ -5216,8 +5267,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Modals_ModalFooter_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Modals/ModalFooter.vue */ "./resources/js/components/Modals/ModalFooter.vue");
 /* harmony import */ var _Modals_ModalBody_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Modals/ModalBody.vue */ "./resources/js/components/Modals/ModalBody.vue");
 /* harmony import */ var _Modals_mixins_ModalMixin__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./Modals/mixins/ModalMixin */ "./resources/js/components/Modals/mixins/ModalMixin.js");
-/* harmony import */ var lodash_uniq__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! lodash/uniq */ "./node_modules/lodash/uniq.js");
-/* harmony import */ var lodash_uniq__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(lodash_uniq__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var _Modals_services_modal_opservice__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./Modals/services/modal.opservice */ "./resources/js/components/Modals/services/modal.opservice.js");
+/* harmony import */ var lodash_uniq__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! lodash/uniq */ "./node_modules/lodash/uniq.js");
+/* harmony import */ var lodash_uniq__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(lodash_uniq__WEBPACK_IMPORTED_MODULE_6__);
 //
 //
 //
@@ -5299,6 +5351,14 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+
 
 
 
@@ -5320,23 +5380,27 @@ __webpack_require__.r(__webpack_exports__);
   methods: {
     ver: function ver() {
       console.log(this.data);
+    },
+    edit: function edit() {
+      this.close("Modal closed");
+      _Modals_services_modal_opservice__WEBPACK_IMPORTED_MODULE_5__.default.editcons(this.data);
     }
   },
   computed: {
     getSintomas: function getSintomas() {
-      return lodash_uniq__WEBPACK_IMPORTED_MODULE_5___default()(this.data.consulta.map(function (_ref) {
+      return lodash_uniq__WEBPACK_IMPORTED_MODULE_6___default()(this.data.consulta.map(function (_ref) {
         var sintoma = _ref.sintoma;
         return sintoma;
       }));
     },
     getHabitos: function getHabitos() {
-      return lodash_uniq__WEBPACK_IMPORTED_MODULE_5___default()(this.data.consulta.map(function (_ref2) {
+      return lodash_uniq__WEBPACK_IMPORTED_MODULE_6___default()(this.data.consulta.map(function (_ref2) {
         var habito = _ref2.habito;
         return habito;
       }));
     },
     getProcedimiento: function getProcedimiento() {
-      return lodash_uniq__WEBPACK_IMPORTED_MODULE_5___default()(this.data.consulta.map(function (_ref3) {
+      return lodash_uniq__WEBPACK_IMPORTED_MODULE_6___default()(this.data.consulta.map(function (_ref3) {
         var proceso = _ref3.proceso;
         return proceso;
       }));
@@ -5357,72 +5421,76 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
 /* harmony export */ });
-/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
-/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _Modals_Modal_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Modals/Modal.vue */ "./resources/js/components/Modals/Modal.vue");
-/* harmony import */ var _Modals_ModalHeader_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Modals/ModalHeader.vue */ "./resources/js/components/Modals/ModalHeader.vue");
-/* harmony import */ var _Modals_ModalFooter_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Modals/ModalFooter.vue */ "./resources/js/components/Modals/ModalFooter.vue");
-/* harmony import */ var _Modals_ModalBody_vue__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./Modals/ModalBody.vue */ "./resources/js/components/Modals/ModalBody.vue");
-/* harmony import */ var _Modals_mixins_ModalMixin__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./Modals/mixins/ModalMixin */ "./resources/js/components/Modals/mixins/ModalMixin.js");
+/* harmony import */ var _Modals_Modal_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Modals/Modal.vue */ "./resources/js/components/Modals/Modal.vue");
+/* harmony import */ var _Modals_ModalHeader_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Modals/ModalHeader.vue */ "./resources/js/components/Modals/ModalHeader.vue");
+/* harmony import */ var _Modals_ModalFooter_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Modals/ModalFooter.vue */ "./resources/js/components/Modals/ModalFooter.vue");
+/* harmony import */ var _Modals_ModalBody_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Modals/ModalBody.vue */ "./resources/js/components/Modals/ModalBody.vue");
+/* harmony import */ var _Modals_mixins_ModalMixin__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./Modals/mixins/ModalMixin */ "./resources/js/components/Modals/mixins/ModalMixin.js");
+/* harmony import */ var _Modals_services_modal_opservice__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./Modals/services/modal.opservice */ "./resources/js/components/Modals/services/modal.opservice.js");
 /* harmony import */ var lodash_uniq__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! lodash/uniq */ "./node_modules/lodash/uniq.js");
 /* harmony import */ var lodash_uniq__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(lodash_uniq__WEBPACK_IMPORTED_MODULE_6__);
 /* harmony import */ var vue_toastification__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! vue-toastification */ "./node_modules/vue-toastification/dist/esm/index.js");
 /* harmony import */ var vue_toastification_dist_index_css__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! vue-toastification/dist/index.css */ "./node_modules/vue-toastification/dist/index.css");
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
-
-function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
-
-function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
-
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 
 
@@ -5438,12 +5506,12 @@ var options = {// You can set your default options here
 Vue.use(vue_toastification__WEBPACK_IMPORTED_MODULE_7__.default, options);
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   components: {
-    Modal: _Modals_Modal_vue__WEBPACK_IMPORTED_MODULE_1__.default,
-    ModalHeader: _Modals_ModalHeader_vue__WEBPACK_IMPORTED_MODULE_2__.default,
-    ModalBody: _Modals_ModalBody_vue__WEBPACK_IMPORTED_MODULE_4__.default,
-    ModalFooter: _Modals_ModalFooter_vue__WEBPACK_IMPORTED_MODULE_3__.default
+    Modal: _Modals_Modal_vue__WEBPACK_IMPORTED_MODULE_0__.default,
+    ModalHeader: _Modals_ModalHeader_vue__WEBPACK_IMPORTED_MODULE_1__.default,
+    ModalBody: _Modals_ModalBody_vue__WEBPACK_IMPORTED_MODULE_3__.default,
+    ModalFooter: _Modals_ModalFooter_vue__WEBPACK_IMPORTED_MODULE_2__.default
   },
-  mixins: [_Modals_mixins_ModalMixin__WEBPACK_IMPORTED_MODULE_5__.default],
+  mixins: [_Modals_mixins_ModalMixin__WEBPACK_IMPORTED_MODULE_4__.default],
   data: function data() {
     return {
       nuevoDiagnostico: {
@@ -5474,63 +5542,9 @@ Vue.use(vue_toastification__WEBPACK_IMPORTED_MODULE_7__.default, options);
     }
   },
   methods: {
-    showme: function showme() {
-      var _this = this;
-
-      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
-          while (1) {
-            switch (_context.prev = _context.next) {
-              case 0:
-                if (!(_this.nuevoDiagnostico.patologia && _this.nuevoDiagnostico.estadoDeSalud)) {
-                  _context.next = 7;
-                  break;
-                }
-
-                _this.nuevoDiagnostico.id_consulta = _this.data.consulta[0].id_consulta;
-                console.log(_this.nuevoDiagnostico);
-                _context.next = 5;
-                return axios.post("/diagnosticos", _this.nuevoDiagnostico);
-
-              case 5:
-                _this.close('Modal closed');
-
-                _this.$toast('Nuevo Diagnostico Registrado Exitosamente!');
-
-              case 7:
-                if (!_this.nuevoDiagnostico.patologia) {
-                  _this.errors.push('La patologia es obligatorio.');
-                }
-
-                if (!_this.nuevoDiagnostico.estadoDeSalud) {
-                  _this.errors.push('El estado de salud es obligatorio.');
-                }
-
-              case 9:
-              case "end":
-                return _context.stop();
-            }
-          }
-        }, _callee);
-      }))();
-    },
-    addSintoma: function addSintoma() {
-      this.nuevaConsulta.sintomas.push({
-        value: " "
-      });
-      console.log(this.nuevaConsulta.sintomas);
-    },
-    addHabito: function addHabito() {
-      this.nuevaConsulta.habitos.push({
-        value: " "
-      });
-      console.log(this.nuevaConsulta.habitos);
-    },
-    addProceso: function addProceso() {
-      this.nuevaConsulta.procesos.push({
-        value: " "
-      });
-      console.log(this.nuevaConsulta.procesos);
+    edit: function edit() {
+      this.close("Modal closed");
+      _Modals_services_modal_opservice__WEBPACK_IMPORTED_MODULE_5__.default.editdiag(this.data);
     }
   },
   computed: {
@@ -5563,6 +5577,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Modals_ModalFooter_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Modals/ModalFooter.vue */ "./resources/js/components/Modals/ModalFooter.vue");
 /* harmony import */ var _Modals_ModalBody_vue__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./Modals/ModalBody.vue */ "./resources/js/components/Modals/ModalBody.vue");
 /* harmony import */ var _Modals_mixins_ModalMixin__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./Modals/mixins/ModalMixin */ "./resources/js/components/Modals/mixins/ModalMixin.js");
+/* harmony import */ var _Modals_services_modal_opservice__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./Modals/services/modal.opservice */ "./resources/js/components/Modals/services/modal.opservice.js");
 
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
@@ -5621,6 +5636,20 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
 
 
 
@@ -5685,6 +5714,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         value: " "
       });
       console.log(this.nuevoRecipe.medicamentosInd);
+    },
+    edit: function edit() {
+      this.close("Modal closed");
+      _Modals_services_modal_opservice__WEBPACK_IMPORTED_MODULE_6__.default.editrec(this.data.recipe.id_recipe);
     }
   }
 });
@@ -5707,6 +5740,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Modals_ModalFooter_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Modals/ModalFooter.vue */ "./resources/js/components/Modals/ModalFooter.vue");
 /* harmony import */ var _Modals_ModalBody_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Modals/ModalBody.vue */ "./resources/js/components/Modals/ModalBody.vue");
 /* harmony import */ var _Modals_mixins_ModalMixin__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./Modals/mixins/ModalMixin */ "./resources/js/components/Modals/mixins/ModalMixin.js");
+/* harmony import */ var _Modals_services_modal_opservice__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./Modals/services/modal.opservice */ "./resources/js/components/Modals/services/modal.opservice.js");
 //
 //
 //
@@ -5760,6 +5794,17 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
 
 
 
@@ -5798,6 +5843,12 @@ __webpack_require__.r(__webpack_exports__);
       id_consulta: "",
       sintomas: [],
       habitos: []
+    }
+  },
+  methods: {
+    edit: function edit() {
+      this.close("Modal closed");
+      _Modals_services_modal_opservice__WEBPACK_IMPORTED_MODULE_5__.default.edittrat(this.data);
     }
   }
 });
@@ -5916,6 +5967,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
 /* harmony export */ });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -6211,6 +6272,46 @@ __webpack_require__.r(__webpack_exports__);
     }
   }
 });
+
+/***/ }),
+
+/***/ "./resources/js/components/Modals/services/modal.opservice.js":
+/*!********************************************************************!*\
+  !*** ./resources/js/components/Modals/services/modal.opservice.js ***!
+  \********************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
+/* harmony export */ });
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm.js");
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (new vue__WEBPACK_IMPORTED_MODULE_0__.default({
+  methods: {
+    editcons: function editcons(data) {
+      this.$emit('editcons', {
+        data: data
+      });
+    },
+    editdiag: function editdiag(data) {
+      this.$emit('editdiag', {
+        data: data
+      });
+    },
+    edittrat: function edittrat(data) {
+      this.$emit('edittrat', {
+        data: data
+      });
+    },
+    editrec: function editrec(data) {
+      this.$emit('editrec', {
+        data: data
+      });
+    }
+  }
+}));
 
 /***/ }),
 
@@ -10745,7 +10846,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n#appx {\r\n  font-family: Avenir, Helvetica, Arial, sans-serif;\r\n  -webkit-font-smoothing: antialiased;\r\n  -moz-osx-font-smoothing: grayscale;\r\n  color: #2c3e50;\r\n  margin-top: 60px;\r\n  display: flex;\r\n  flex-direction: row;\r\n  justify-content: center;\n}\n.mostrar {\r\n  display: list-item;\r\n  opacity: 1;\r\n  background: rgba(75, 56, 143, 0.705);\n}\n.highlight {\r\n  background-color: rgb(79, 139, 196);\r\n  color: white;\n}\n.highlightCons {\r\n  background-color: rgb(79, 139, 196);\r\n  color: white;\n}\n.highlightDiag {\r\n  background-color: rgb(79, 139, 196);\r\n  color: white;\n}\n.highlightTrat {\r\n  background-color: rgb(79, 139, 196);\r\n  color: white;\n}\n.highlightRecipe {\r\n  background-color: rgb(79, 139, 196);\r\n  color: white;\n}\ntr:hover {\r\n  cursor: pointer;\r\n  background-color: rgb(159, 213, 255);\r\n  transition: 0.1s;\n}\n@-webkit-keyframes slideInFromLeft {\n0% {\r\n    transform: translateX(-200%);\r\n    opacity: 0%;\n}\n100% {\r\n    transform: translateX(0);\r\n    opacity: 100%;\n}\n}\n@keyframes slideInFromLeft {\n0% {\r\n    transform: translateX(-200%);\r\n    opacity: 0%;\n}\n100% {\r\n    transform: translateX(0);\r\n    opacity: 100%;\n}\n}\n.tr-anim {\r\n  --index: 0;\r\n  opacity: 0;\r\n  transition: opacity 1s;\r\n  /* /////////ANIMATIONS///////////// */\r\n  -webkit-animation-duration: 1s;\r\n          animation-duration: 1s;\r\n  -webkit-animation-timing-function: ease-out;\r\n          animation-timing-function: ease-out;\r\n  -webkit-animation-delay: calc(0.07s * var(--index));\r\n          animation-delay: calc(0.07s * var(--index));\r\n  -webkit-animation-iteration-count: 1;\r\n          animation-iteration-count: 1;\r\n  -webkit-animation-name: slideInFromLeft;\r\n          animation-name: slideInFromLeft;\r\n  -webkit-animation-fill-mode: forwards;\r\n          animation-fill-mode: forwards;\r\n  /* /////////ANIMATIONS///////////// */\n}\n.trslt-btn {\r\n  --pos: 16.66015625;\r\n  /* /////////ANIMATIONS///////////// */\r\n  top: (var(--pos));\r\n  transform: scale(calc(var(--pos) * 0.01));\r\n  position: absolute;\r\n  -webkit-animation-duration: 1s;\r\n          animation-duration: 1s;\r\n  -webkit-animation-timing-function: ease-out;\r\n          animation-timing-function: ease-out;\r\n  -webkit-animation-delay: 0.07s;\r\n          animation-delay: 0.07s;\r\n  -webkit-animation-iteration-count: 99;\r\n          animation-iteration-count: 99;\r\n  -webkit-animation-name: slide;\r\n          animation-name: slide;\r\n  /* /////////ANIMATIONS///////////// */\n}\n[data-animation] {\r\n  -webkit-animation: var(--pos);\r\n          animation: var(--pos);\n}\n@-webkit-keyframes slide {\nfrom {\r\n    transform: translateY(0%);\n}\nto {\r\n    transform: translateY(var(--pos));\n}\n}\n@keyframes slide {\nfrom {\r\n    transform: translateY(0%);\n}\nto {\r\n    transform: translateY(var(--pos));\n}\n}\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n#appx {\r\n  font-family: Avenir, Helvetica, Arial, sans-serif;\r\n  -webkit-font-smoothing: antialiased;\r\n  -moz-osx-font-smoothing: grayscale;\r\n  color: #2c3e50;\r\n  margin-top: 60px;\r\n  display: flex;\r\n  flex-direction: row;\r\n  justify-content: center;\n}\n.mostrar {\r\n  display: list-item;\r\n  opacity: 1;\r\n  background: rgba(75, 56, 143, 0.705);\n}\n.highlight {\r\n  background-color: rgb(79, 139, 196);\r\n  color: white;\n}\n.highlightCons {\r\n  background-color: rgb(79, 139, 196);\r\n  color: white;\n}\n.highlightDiag {\r\n  background-color: rgb(79, 139, 196);\r\n  color: white;\n}\n.highlightTrat {\r\n  background-color: rgb(79, 139, 196);\r\n  color: white;\n}\n.highlightRecipe {\r\n  background-color: rgb(79, 139, 196);\r\n  color: white;\n}\ntr:hover {\r\n  cursor: pointer;\r\n  background-color: rgb(159, 213, 255);\r\n  transition: 0.1s;\n}\n@-webkit-keyframes slideInFromLeft {\n0% {\r\n    transform: translateX(-200%);\r\n    opacity: 0%;\n}\n100% {\r\n    transform: translateX(0);\r\n    opacity: 100%;\n}\n}\n@keyframes slideInFromLeft {\n0% {\r\n    transform: translateX(-200%);\r\n    opacity: 0%;\n}\n100% {\r\n    transform: translateX(0);\r\n    opacity: 100%;\n}\n}\n.tr-anim {\r\n  --index: 0;\r\n  opacity: 0;\r\n  transition: opacity 1s;\r\n  /* /////////ANIMATIONS///////////// */\r\n  -webkit-animation-duration: 0.7s;\r\n          animation-duration: 0.7s;\r\n  -webkit-animation-timing-function: ease-out;\r\n          animation-timing-function: ease-out;\r\n  -webkit-animation-delay: calc(0.07s * var(--index));\r\n          animation-delay: calc(0.07s * var(--index));\r\n  -webkit-animation-iteration-count: 1;\r\n          animation-iteration-count: 1;\r\n  -webkit-animation-name: slideInFromLeft;\r\n          animation-name: slideInFromLeft;\r\n  -webkit-animation-fill-mode: forwards;\r\n          animation-fill-mode: forwards;\r\n  /* /////////ANIMATIONS///////////// */\n}\n.trslt-btn {\r\n  --pos: 16.66015625;\r\n  /* /////////ANIMATIONS///////////// */\r\n  top: (var(--pos));\r\n  transform: scale(calc(var(--pos) * 0.01));\r\n  position: absolute;\r\n  -webkit-animation-duration: 1s;\r\n          animation-duration: 1s;\r\n  -webkit-animation-timing-function: ease-out;\r\n          animation-timing-function: ease-out;\r\n  -webkit-animation-delay: 0.07s;\r\n          animation-delay: 0.07s;\r\n  -webkit-animation-iteration-count: 99;\r\n          animation-iteration-count: 99;\r\n  -webkit-animation-name: slide;\r\n          animation-name: slide;\r\n  /* /////////ANIMATIONS///////////// */\n}\n[data-animation] {\r\n  -webkit-animation: var(--pos);\r\n          animation: var(--pos);\n}\n@-webkit-keyframes slide {\nfrom {\r\n    transform: translateY(0%);\n}\nto {\r\n    transform: translateY(var(--pos));\n}\n}\n@keyframes slide {\nfrom {\r\n    transform: translateY(0%);\n}\nto {\r\n    transform: translateY(var(--pos));\n}\n}\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -10865,7 +10966,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.bluegradient {\r\n  background: linear-gradient(to right, #7f8eff, #9fbdff);\r\n  color: white;\n}\n.greengradient {\r\n  background: linear-gradient(to right, #5aff5a, #85ff8f);\r\n  color: white;\n}\n.yellowgradient {\r\n  background: linear-gradient(to right, #ffac53, #ffc085);\r\n  color: white;\n}\n.redgradient {\r\n  background: linear-gradient(to right, #ff5a5a, #ff8585);\r\n  color: white;\n}\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.bluegradiente {\r\n  background: linear-gradient(to right, #4361ee, #4895ef);\r\n  color: white;\n}\n.purplegradient {\r\n  background: linear-gradient(to right, #560bad, #b5179e);\r\n  color: white;\n}\n.yellowgradient {\r\n  background: linear-gradient(to right, #ffac53, #ffc085);\r\n  color: white;\n}\n.redgradient {\r\n  background: linear-gradient(to right, #ff5a5a, #ff8585);\r\n  color: white;\n}\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -10961,7 +11062,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.padding {\r\n    padding: 3rem !important\n}\n.user-card-full {\r\n    overflow: hidden\n}\n.card {\r\n    border-radius: 5px;\r\n    box-shadow: 0 1px 20px 0 rgba(69, 90, 100, 0.08);\r\n    border: none;\r\n    margin-bottom: 30px\n}\n.m-r-0 {\r\n    margin-right: 0px\n}\n.m-l-0 {\r\n    margin-left: 0px\n}\n.user-card-full .user-profile {\r\n    border-radius: 5px 0 0 5px\n}\n.bg-c-lite-green {\r\n    background: linear-gradient(to right, #5a6bee, #6390f2)\n}\n.user-profile {\r\n    padding: 20px 0\n}\n.card-block {\r\n    padding: 1.25rem\n}\n.m-b-25 {\r\n    margin-bottom: 25px\n}\n.img-radius {\r\n    border-radius: 5px\n}\nh6 {\r\n    font-size: 14px\n}\n.card .card-block p {\r\n    line-height: 25px\n}\n@media only screen and (min-width: 1400px) {\np {\r\n        font-size: 14px\n}\n}\n.card-block {\r\n    padding: 1.25rem\n}\n.b-b-default {\r\n    border-bottom: 1px solid #e0e0e0\n}\n.m-b-20 {\r\n    margin-bottom: 20px\n}\n.p-b-5 {\r\n    padding-bottom: 5px !important\n}\n.card .card-block p {\r\n    line-height: 25px\n}\n.m-b-10 {\r\n    margin-bottom: 10px\n}\n.text-muted {\r\n    color: #919aa3 !important\n}\n.b-b-default {\r\n    border-bottom: 1px solid #e0e0e0\n}\n.f-w-600 {\r\n    font-weight: 600\n}\n.m-b-20 {\r\n    margin-bottom: 20px\n}\n.m-t-40 {\r\n    margin-top: 20px\n}\n.p-b-5 {\r\n    padding-bottom: 5px !important\n}\n.m-b-10 {\r\n    margin-bottom: 10px\n}\n.m-t-40 {\r\n    margin-top: 20px\n}\n.user-card-full .social-link li {\r\n    display: inline-block\n}\n.user-card-full .social-link li a {\r\n    font-size: 20px;\r\n    margin: 0 10px 0 0;\r\n    transition: all 0.3s ease-in-out\n}\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.padding {\r\n    padding: 3rem !important\n}\n.user-card-full {\r\n    overflow: hidden\n}\n.card {\r\n    border-radius: 5px;\r\n    box-shadow: 0 1px 20px 0 rgba(69, 90, 100, 0.08);\r\n    border: none;\r\n    margin-bottom: 30px\n}\n.m-r-0 {\r\n    margin-right: 0px\n}\n.m-l-0 {\r\n    margin-left: 0px\n}\n.user-card-full .user-profile {\r\n    border-radius: 5px 0 0 5px\n}\n.bg-c-lite-green {\r\n    background: linear-gradient(to right, #4361ee, #4895ef)\n}\n.user-profile {\r\n    padding: 20px 0\n}\n.card-block {\r\n    padding: 1.25rem\n}\n.m-b-25 {\r\n    margin-bottom: 25px\n}\n.img-radius {\r\n    border-radius: 5px\n}\nh6 {\r\n    font-size: 14px\n}\n.card .card-block p {\r\n    line-height: 25px\n}\n@media only screen and (min-width: 1400px) {\np {\r\n        font-size: 14px\n}\n}\n.card-block {\r\n    padding: 1.25rem\n}\n.b-b-default {\r\n    border-bottom: 1px solid #e0e0e0\n}\n.m-b-20 {\r\n    margin-bottom: 20px\n}\n.p-b-5 {\r\n    padding-bottom: 5px !important\n}\n.card .card-block p {\r\n    line-height: 25px\n}\n.m-b-10 {\r\n    margin-bottom: 10px\n}\n.text-muted {\r\n    color: #919aa3 !important\n}\n.b-b-default {\r\n    border-bottom: 1px solid #e0e0e0\n}\n.f-w-600 {\r\n    font-weight: 600\n}\n.m-b-20 {\r\n    margin-bottom: 20px\n}\n.m-t-40 {\r\n    margin-top: 20px\n}\n.p-b-5 {\r\n    padding-bottom: 5px !important\n}\n.m-b-10 {\r\n    margin-bottom: 10px\n}\n.m-t-40 {\r\n    margin-top: 20px\n}\n.user-card-full .social-link li {\r\n    display: inline-block\n}\n.user-card-full .social-link li a {\r\n    font-size: 20px;\r\n    margin: 0 10px 0 0;\r\n    transition: all 0.3s ease-in-out\n}\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -68217,7 +68318,7 @@ var render = function() {
             _vm._v(" "),
             _c("p", [
               _vm._v(
-                "Para ver mas informacion del paciente que desea presione doble click sobre su nombre."
+                "\n        Para ver mas informacion del paciente que desea presione doble click\n        sobre su nombre.\n      "
               )
             ]),
             _vm._v(" "),
@@ -68239,7 +68340,7 @@ var render = function() {
                 },
                 domProps: { value: _vm.cedula },
                 on: {
-                  change: function($event) {
+                  keyup: function($event) {
                     return _vm.onTextChange()
                   },
                   input: function($event) {
@@ -68305,24 +68406,27 @@ var render = function() {
                 }),
                 0
               )
-            ]),
-            _vm._v(" "),
-            _c(
-              "button",
-              { staticClass: "btn btn-primary", on: { click: _vm.addModal } },
-              [_vm._v("Ver Paciente")]
-            )
+            ])
           ]),
           _vm._v(" "),
           _c("Tab", { attrs: { isSelected: _vm.selected === "Consultas" } }, [
-            _c("div", { staticClass: "row m-3" }, [
+            _c("div", { staticClass: "row my-3" }, [
               _c(
                 "div",
                 { staticClass: "col" },
                 [
                   _vm.selectedUser
                     ? _c("PerfilPaciente", { attrs: { data: _vm.persona } })
-                    : _vm._e()
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-success",
+                      on: { click: _vm.nuevaConsulta }
+                    },
+                    [_vm._v("\n            Nueva Consulta\n          ")]
+                  )
                 ],
                 1
               ),
@@ -68362,7 +68466,7 @@ var render = function() {
                       ]),
                       _vm._v(" "),
                       _c("th", { attrs: { scope: "col" } }, [
-                        _vm._v("Medico Tratante")
+                        _vm._v("Medico De La Consulta")
                       ]),
                       _vm._v(" "),
                       _c("th", { attrs: { scope: "col" } }, [
@@ -68396,7 +68500,8 @@ var render = function() {
                             },
                             click: function($event) {
                               return _vm.selectRowConsulta(consulta)
-                            }
+                            },
+                            dblclick: _vm.verConsulta
                           }
                         },
                         [
@@ -68429,63 +68534,7 @@ var render = function() {
                     0
                   )
                 ])
-              : _vm._e(),
-            _vm._v(" "),
-            _c(
-              "div",
-              {
-                staticClass: "trslt-btn",
-                style: { top: 300 + _vm.top + "px" }
-              },
-              [
-                _c(
-                  "button",
-                  {
-                    staticClass: "btn btn-primary",
-                    on: { click: _vm.nuevaConsulta }
-                  },
-                  [_vm._v("\n          Nueva Consulta\n        ")]
-                )
-              ]
-            ),
-            _vm._v(" "),
-            _c(
-              "button",
-              {
-                staticClass: "btn btn-primary my-4",
-                attrs: { type: "button" },
-                on: { click: _vm.verConsulta }
-              },
-              [_vm._v("\n        Ver Consulta\n      ")]
-            ),
-            _vm._v(" "),
-            _c(
-              "button",
-              {
-                staticClass: "btn btn-primary my-4",
-                attrs: { type: "button" },
-                on: {
-                  click: function($event) {
-                    return _vm.editarConsulta()
-                  }
-                }
-              },
-              [_vm._v("\n        Editar Consulta\n      ")]
-            ),
-            _vm._v(" "),
-            _c(
-              "button",
-              {
-                staticClass: "btn btn-success my-4",
-                attrs: { type: "button" },
-                on: {
-                  click: function($event) {
-                    return _vm.imprimirConsulta()
-                  }
-                }
-              },
-              [_vm._v("\n        Imprimir Consulta\n      ")]
-            )
+              : _vm._e()
           ]),
           _vm._v(" "),
           _c(
@@ -68494,14 +68543,24 @@ var render = function() {
             [
               _c("p"),
               _vm._v(" "),
-              _c("div", { staticClass: "row m-3" }, [
+              _c("div", { staticClass: "row my-3" }, [
                 _c(
                   "div",
                   { staticClass: "col" },
                   [
                     _vm.selectedUser
                       ? _c("PerfilPaciente", { attrs: { data: _vm.persona } })
-                      : _vm._e()
+                      : _vm._e(),
+                    _vm._v(" "),
+                    _c(
+                      "button",
+                      {
+                        staticClass: "btn btn-success",
+                        attrs: { type: "button" },
+                        on: { click: _vm.nuevoDiagnostico }
+                      },
+                      [_vm._v("\n            Nuevo Diagnostico\n          ")]
+                    )
                   ],
                   1
                 ),
@@ -68570,7 +68629,8 @@ var render = function() {
                             on: {
                               click: function($event) {
                                 return _vm.selectRowDiag(diagnostico)
-                              }
+                              },
+                              dblclick: _vm.verDiagnostico
                             }
                           },
                           [
@@ -68593,55 +68653,7 @@ var render = function() {
                       0
                     )
                   ])
-                : _vm._e(),
-              _vm._v(" "),
-              _c(
-                "button",
-                {
-                  staticClass: "btn btn-success my-4",
-                  attrs: { type: "button" },
-                  on: { click: _vm.nuevoDiagnostico }
-                },
-                [_vm._v("\n        Nuevo Diagnostico\n      ")]
-              ),
-              _vm._v(" "),
-              _c(
-                "button",
-                {
-                  staticClass: "btn btn-primary my-4",
-                  attrs: { type: "button" },
-                  on: { click: _vm.verDiagnostico }
-                },
-                [_vm._v("\n        Ver Diagnostico\n      ")]
-              ),
-              _vm._v(" "),
-              _c(
-                "button",
-                {
-                  staticClass: "btn btn-primary my-4",
-                  attrs: { type: "button" },
-                  on: {
-                    click: function($event) {
-                      return _vm.editarDiagnostico()
-                    }
-                  }
-                },
-                [_vm._v("\n        Editar Diagnostico\n      ")]
-              ),
-              _vm._v(" "),
-              _c(
-                "button",
-                {
-                  staticClass: "btn btn-success my-4",
-                  attrs: { type: "button" },
-                  on: {
-                    click: function($event) {
-                      return _vm.imprimirDiagnostico()
-                    }
-                  }
-                },
-                [_vm._v("\n        Imprimir Diagnostico\n      ")]
-              )
+                : _vm._e()
             ]
           ),
           _vm._v(" "),
@@ -68651,14 +68663,28 @@ var render = function() {
             [
               _c("p"),
               _vm._v(" "),
-              _c("div", { staticClass: "row m-3" }, [
+              _c("div", { staticClass: "row my-3" }, [
                 _c(
                   "div",
                   { staticClass: "col" },
                   [
                     _vm.selectedUser
                       ? _c("PerfilPaciente", { attrs: { data: _vm.persona } })
-                      : _vm._e()
+                      : _vm._e(),
+                    _vm._v(" "),
+                    _c(
+                      "button",
+                      {
+                        staticClass: "btn btn-success my-2",
+                        attrs: { type: "button" },
+                        on: {
+                          click: function($event) {
+                            return _vm.nuevoTratamiento()
+                          }
+                        }
+                      },
+                      [_vm._v("\n            Nuevo Tratamiento\n          ")]
+                    )
                   ],
                   1
                 ),
@@ -68727,7 +68753,8 @@ var render = function() {
                             on: {
                               click: function($event) {
                                 return _vm.selectRowTrat(tratamiento)
-                              }
+                              },
+                              dblclick: _vm.verTratamiento
                             }
                           },
                           [
@@ -68756,68 +68783,6 @@ var render = function() {
                       0
                     )
                   ])
-                : _vm._e(),
-              _vm._v(" "),
-              _c(
-                "button",
-                {
-                  staticClass: "btn btn-success my-4",
-                  attrs: { type: "button" },
-                  on: {
-                    click: function($event) {
-                      return _vm.nuevoTratamiento()
-                    }
-                  }
-                },
-                [_vm._v("\n        Nuevo Tratamiento\n      ")]
-              ),
-              _vm._v(" "),
-              _vm.selectedTrat
-                ? _c(
-                    "button",
-                    {
-                      staticClass: "btn btn-primary my-4",
-                      attrs: { type: "button" },
-                      on: {
-                        click: function($event) {
-                          return _vm.verTratamiento()
-                        }
-                      }
-                    },
-                    [_vm._v("\n        Ver Tratamiento\n      ")]
-                  )
-                : _vm._e(),
-              _vm._v(" "),
-              _vm.selectedTrat
-                ? _c(
-                    "button",
-                    {
-                      staticClass: "btn btn-primary my-4",
-                      attrs: { type: "button" },
-                      on: {
-                        click: function($event) {
-                          return _vm.editarTratamiento()
-                        }
-                      }
-                    },
-                    [_vm._v("\n        Editar Tratamiento\n      ")]
-                  )
-                : _vm._e(),
-              _vm._v(" "),
-              _vm.selectedTrat
-                ? _c(
-                    "button",
-                    {
-                      staticClass: "btn btn-success my-4",
-                      attrs: { type: "button" },
-                      on: {
-                        click: function($event) {
-                          return _vm.imprimirTratamiento()
-                        }
-                      }
-                    },
-                    [_vm._v("\n        Imprimir Tratamiento\n      ")]
-                  )
                 : _vm._e()
             ]
           ),
@@ -68825,14 +68790,29 @@ var render = function() {
           _c("Tab", { attrs: { isSelected: _vm.selected === "Recipes" } }, [
             _c("p"),
             _vm._v(" "),
-            _c("div", { staticClass: "row m-3" }, [
+            _c("div", { staticClass: "row my-3" }, [
               _c(
                 "div",
                 { staticClass: "col" },
                 [
                   _vm.selectedUser
                     ? _c("PerfilPaciente", { attrs: { data: _vm.persona } })
-                    : _vm._e()
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-success my-2",
+                      attrs: { type: "button" },
+                      on: {
+                        click: function($event) {
+                          _vm.modificar = false
+                          _vm.nuevoRecipe()
+                        }
+                      }
+                    },
+                    [_vm._v("\n            Nuevo Recipe\n          ")]
+                  )
                 ],
                 1
               ),
@@ -68897,6 +68877,9 @@ var render = function() {
                           on: {
                             click: function($event) {
                               return _vm.selectRowRecipe(recipe)
+                            },
+                            dblclick: function($event) {
+                              return _vm.verRecipe(_vm.selectedRecipe)
                             }
                           }
                         },
@@ -68916,77 +68899,13 @@ var render = function() {
                     0
                   )
                 ])
-              : _vm._e(),
-            _vm._v(" "),
-            _c(
-              "button",
-              {
-                staticClass: "btn btn-success my-4",
-                attrs: { type: "button" },
-                on: {
-                  click: function($event) {
-                    _vm.modificar = false
-                    _vm.nuevoRecipe()
-                  }
-                }
-              },
-              [_vm._v("\n        Nuevo Recipe\n      ")]
-            ),
-            _vm._v(" "),
-            _vm.selectedRecipe
-              ? _c(
-                  "button",
-                  {
-                    staticClass: "btn btn-primary my-4",
-                    attrs: { type: "button" },
-                    on: {
-                      click: function($event) {
-                        return _vm.verRecipe(_vm.selectedRecipe)
-                      }
-                    }
-                  },
-                  [_vm._v("\n        Ver Recipe\n      ")]
-                )
-              : _vm._e(),
-            _vm._v(" "),
-            _vm.selectedRecipe
-              ? _c(
-                  "button",
-                  {
-                    staticClass: "btn btn-success my-4",
-                    attrs: { type: "button" },
-                    on: {
-                      click: function($event) {
-                        _vm.modificar = false
-                        _vm.verRecipe()
-                      }
-                    }
-                  },
-                  [_vm._v("\n        Imprimir Recipe\n      ")]
-                )
-              : _vm._e(),
-            _vm._v(" "),
-            _vm.selectedRecipe
-              ? _c(
-                  "button",
-                  {
-                    staticClass: "btn btn-warning my-4",
-                    attrs: { type: "button" },
-                    on: {
-                      click: function($event) {
-                        return _vm.editarRecipe(_vm.selectedRecipe)
-                      }
-                    }
-                  },
-                  [_vm._v("\n        Editar Recipe\n      ")]
-                )
               : _vm._e()
           ])
         ],
         1
       ),
       _vm._v(" "),
-      _c("ModalRoot", { attrs: { listdata: _vm.persona } })
+      _c("ModalRoot")
     ],
     1
   )
@@ -69328,176 +69247,142 @@ var render = function() {
       _c("ModalBody", [
         _c("div", { staticClass: "row" }, [
           _c("div", { staticClass: "col" }, [
-            _c(
-              "div",
-              {
-                staticClass: "card bluegradient",
-                staticStyle: { width: "18rem" }
-              },
-              [
-                _c("div", { staticClass: "card-body" }, [
-                  _c("h5", { staticClass: "card-title" }, [
-                    _vm._v("Datos del Paciente")
-                  ]),
-                  _vm._v(" "),
-                  _c("h6", [_vm._v("Nombres y Apellidos:")]),
-                  _vm._v(" "),
-                  _c("p", [
-                    _vm._v(
-                      _vm._s(_vm.data.persona.nombre) +
-                        " " +
-                        _vm._s(_vm.data.persona.apellido)
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _c("h6", [_vm._v("Cedula:")]),
-                  _vm._v(" "),
-                  _c("p", [_vm._v(_vm._s(_vm.data.persona.cedula))]),
-                  _vm._v(" "),
-                  _c("h6", [_vm._v("Genero:")]),
-                  _vm._v(" "),
-                  _c("p", [_vm._v(_vm._s(_vm.data.persona.genero))]),
-                  _vm._v(" "),
-                  _c("h6", [_vm._v("Edad:")]),
-                  _vm._v(" "),
-                  _c("p", [_vm._v(_vm._s(_vm.data.persona.edad))])
-                ])
-              ]
-            )
+            _c("div", { staticClass: "card bluegradiente" }, [
+              _c("div", { staticClass: "card-body" }, [
+                _c("h5", { staticClass: "card-title" }, [
+                  _vm._v("Datos del Paciente")
+                ]),
+                _vm._v(" "),
+                _c("h6", [_vm._v("Nombres y Apellidos:")]),
+                _vm._v(" "),
+                _c("p", [
+                  _vm._v(
+                    _vm._s(_vm.data.persona.nombre) +
+                      " " +
+                      _vm._s(_vm.data.persona.apellido)
+                  )
+                ]),
+                _vm._v(" "),
+                _c("h6", [_vm._v("Cedula:")]),
+                _vm._v(" "),
+                _c("p", [_vm._v(_vm._s(_vm.data.persona.cedula))]),
+                _vm._v(" "),
+                _c("h6", [_vm._v("Genero:")]),
+                _vm._v(" "),
+                _c("p", [_vm._v(_vm._s(_vm.data.persona.genero))]),
+                _vm._v(" "),
+                _c("h6", [_vm._v("Edad:")]),
+                _vm._v(" "),
+                _c("p", [_vm._v(_vm._s(_vm.data.persona.edad))])
+              ])
+            ])
           ]),
           _vm._v(" "),
           _c("div", { staticClass: "col" }, [
-            _c(
-              "div",
-              {
-                staticClass: "card greengradient",
-                staticStyle: { width: "18rem" }
-              },
-              [
-                _c(
-                  "div",
-                  { staticClass: "card-body" },
-                  [
-                    _c("h5", { staticClass: "card-title" }, [
-                      _vm._v("Fecha de la Consulta")
-                    ]),
-                    _vm._v(" "),
-                    _c("p", { staticClass: "card-text" }, [
-                      _vm._v(_vm._s(_vm.data.consulta[0].fecha_consulta))
-                    ]),
-                    _vm._v(" "),
-                    _c("h5", { staticClass: "card-title" }, [
-                      _vm._v("Especialidad de la consulta")
-                    ]),
-                    _vm._v(" "),
-                    _c("p", { staticClass: "card-text" }, [
-                      _vm._v(
-                        "\n              " +
-                          _vm._s(_vm.data.consulta[0].nombre_especialidad) +
-                          "\n            "
-                      )
-                    ]),
-                    _vm._v(" "),
-                    _c("h5", { staticClass: "card-title" }, [
-                      _vm._v("Sintomas del Paciente")
-                    ]),
-                    _vm._v(" "),
-                    _vm._l(_vm.getSintomas, function(sintoma) {
-                      return _c("p", { staticClass: "card-text" }, [
-                        _vm._v(
-                          "\n              " +
-                            _vm._s(sintoma) +
-                            "\n            "
-                        )
-                      ])
-                    })
-                  ],
-                  2
-                )
-              ]
-            )
+            _c("div", { staticClass: "card purplegradient" }, [
+              _c(
+                "div",
+                { staticClass: "card-body" },
+                [
+                  _c("h5", { staticClass: "card-title" }, [
+                    _vm._v("Fecha de la Consulta")
+                  ]),
+                  _vm._v(" "),
+                  _c("p", { staticClass: "card-text" }, [
+                    _vm._v(_vm._s(_vm.data.consulta[0].fecha_consulta))
+                  ]),
+                  _vm._v(" "),
+                  _c("h5", { staticClass: "card-title" }, [
+                    _vm._v("Especialidad de la consulta")
+                  ]),
+                  _vm._v(" "),
+                  _c("p", { staticClass: "card-text" }, [
+                    _vm._v(
+                      "\n              " +
+                        _vm._s(_vm.data.consulta[0].nombre_especialidad) +
+                        "\n            "
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("h5", { staticClass: "card-title" }, [
+                    _vm._v("Sintomas del Paciente")
+                  ]),
+                  _vm._v(" "),
+                  _vm._l(_vm.getSintomas, function(sintoma) {
+                    return _c("p", { staticClass: "card-text" }, [
+                      _c("strong", [_vm._v("Sintoma: ")]),
+                      _vm._v(_vm._s(sintoma) + "\n            ")
+                    ])
+                  })
+                ],
+                2
+              )
+            ])
           ])
         ]),
         _vm._v(" "),
         _c("div", { staticClass: "row" }, [
           _c("div", { staticClass: "col" }, [
-            _c(
-              "div",
-              {
-                staticClass: "card yellowgradient",
-                staticStyle: { width: "18rem" }
-              },
-              [
-                _c(
-                  "div",
-                  { staticClass: "card-body" },
-                  [
-                    _c("h5", { staticClass: "card-title" }, [
-                      _vm._v("Habitos del Paciente")
-                    ]),
-                    _vm._v(" "),
-                    _vm._l(_vm.getHabitos, function(habito) {
-                      return _c(
-                        "p",
-                        { key: habito.id_habito, staticClass: "card-text" },
-                        [
-                          _vm._v(
-                            "\n              " +
-                              _vm._s(habito) +
-                              "\n            "
-                          )
-                        ]
-                      )
-                    })
-                  ],
-                  2
-                )
-              ]
-            )
+            _c("div", { staticClass: "card purplegradient" }, [
+              _c(
+                "div",
+                { staticClass: "card-body" },
+                [
+                  _c("h5", { staticClass: "card-title" }, [
+                    _vm._v("Habitos del Paciente")
+                  ]),
+                  _vm._v(" "),
+                  _vm._l(_vm.getHabitos, function(habito) {
+                    return _c(
+                      "p",
+                      { key: habito.id_habito, staticClass: "card-text" },
+                      [
+                        _c("strong", [_vm._v("Habito:")]),
+                        _vm._v(" " + _vm._s(habito) + "\n            ")
+                      ]
+                    )
+                  })
+                ],
+                2
+              )
+            ])
           ]),
           _vm._v(" "),
           _c("div", { staticClass: "col" }, [
-            _c(
-              "div",
-              {
-                staticClass: "card redgradient",
-                staticStyle: { width: "18rem" }
-              },
-              [
-                _c(
-                  "div",
-                  { staticClass: "card-body" },
-                  [
-                    _c("h5", { staticClass: "card-title" }, [
-                      _vm._v("Procedimientos en la Consulta")
-                    ]),
-                    _vm._v(" "),
-                    _vm._l(_vm.getProcedimiento, function(
-                      procedimiento,
-                      index
-                    ) {
-                      return _c("p", { key: index, staticClass: "card-text" }, [
-                        _vm._v(
-                          "\n              " +
-                            _vm._s(procedimiento) +
-                            " " +
-                            _vm._s(_vm.data.consulta[index].resultado) +
-                            "\n            "
-                        )
-                      ])
-                    })
-                  ],
-                  2
-                )
-              ]
-            )
+            _c("div", { staticClass: "card bluegradiente" }, [
+              _c(
+                "div",
+                { staticClass: "card-body" },
+                [
+                  _c("h5", { staticClass: "card-title" }, [
+                    _vm._v("Procedimientos en la Consulta")
+                  ]),
+                  _vm._v(" "),
+                  _vm._l(_vm.getProcedimiento, function(procedimiento, index) {
+                    return _c("p", { key: index, staticClass: "card-text" }, [
+                      _c("strong", [_vm._v(" Procedimiento: ")]),
+                      _vm._v(_vm._s(procedimiento) + " "),
+                      _c("br"),
+                      _vm._v(" "),
+                      _c("strong", [_vm._v("Resultado:")]),
+                      _vm._v(
+                        " " +
+                          _vm._s(_vm.data.consulta[index].resultado) +
+                          "\n            "
+                      )
+                    ])
+                  })
+                ],
+                2
+              )
+            ])
           ])
         ]),
         _vm._v(" "),
         _c("div", { staticClass: "row mt-4" }, [
           _c("div", { staticClass: "col-sm-9" }, [
             _c("h4", { staticClass: "my-2" }, [
-              _vm._v("Procedimientos "),
+              _vm._v("Añadir Procedimientos "),
               _c(
                 "button",
                 {
@@ -69651,7 +69536,7 @@ var render = function() {
       _c("ModalHeader", [
         _c("h3", { staticClass: "modal-title" }, [
           _vm._v(
-            "\n      Diagnostico del paciente N°: P_" +
+            "\n      Editar Diagnostico del paciente N°: P_" +
               _vm._s(_vm.data.persona.id_persona) +
               "\n    "
           )
@@ -69685,7 +69570,7 @@ var render = function() {
             _vm._v(" "),
             _c("p", [
               _vm._v(
-                "\n        Consulta N°" +
+                "\n        Consulta N°: C_" +
                   _vm._s(_vm.data.consulta[0].id_consulta) +
                   " "
               ),
@@ -69781,6 +69666,12 @@ var render = function() {
             }
           },
           [_vm._v("\n      Cerrar\n    ")]
+        ),
+        _vm._v(" "),
+        _c(
+          "button",
+          { staticClass: "btn btn-success", on: { click: _vm.guardar } },
+          [_vm._v("\n      Guardar Cambios\n    ")]
         )
       ])
     ],
@@ -69914,7 +69805,7 @@ var render = function() {
         _c("h5", [_vm._v("Objetivos y riesgos del Tratamiento")]),
         _vm._v(" "),
         _c("div", { staticClass: "row" }, [
-          _c("div", { staticClass: "col m-2 card lb-gradient" }, [
+          _c("div", { staticClass: "col m-2 card bluegradiente" }, [
             _c("div", { staticClass: "card-body" }, [
               _c("h5", { staticClass: "card-title" }, [_vm._v("Objetivos")]),
               _vm._v(" "),
@@ -69924,7 +69815,7 @@ var render = function() {
             ])
           ]),
           _vm._v(" "),
-          _c("div", { staticClass: "col m-2 card lb-gradient" }, [
+          _c("div", { staticClass: "col m-2 card bluegradiente" }, [
             _c("div", { staticClass: "card-body" }, [
               _c("h5", { staticClass: "card-title" }, [_vm._v("Riesgos")]),
               _vm._v(" "),
@@ -70203,7 +70094,7 @@ var render = function() {
         _c(
           "button",
           {
-            staticClass: "btn btn-primary",
+            staticClass: "btn btn-danger",
             on: {
               click: function($event) {
                 return _vm.close("Modal closed")
@@ -70215,7 +70106,7 @@ var render = function() {
         _vm._v(" "),
         _c(
           "button",
-          { staticClass: "btn btn-primary", on: { click: _vm.guardar } },
+          { staticClass: "btn btn-success", on: { click: _vm.guardar } },
           [_vm._v("\n      Guardar Cambios\n    ")]
         )
       ])
@@ -70326,7 +70217,7 @@ var render = function() {
         _c("div", { staticClass: "row mt-4" }, [
           _c("div", { staticClass: "col-sm-9" }, [
             _c("h4", { staticClass: "my-2" }, [
-              _vm._v("Sintomas "),
+              _vm._v("\n          Sintomas\n          "),
               _c(
                 "button",
                 {
@@ -70398,7 +70289,7 @@ var render = function() {
         _c("div", { staticClass: "row mt-4" }, [
           _c("div", { staticClass: "col-sm-9" }, [
             _c("h4", { staticClass: "my-2" }, [
-              _vm._v("Habitos "),
+              _vm._v("\n          Habitos\n          "),
               _c(
                 "button",
                 {
@@ -70470,7 +70361,7 @@ var render = function() {
         _c("div", { staticClass: "row mt-4" }, [
           _c("div", { staticClass: "col-sm-9" }, [
             _c("h4", { staticClass: "my-2" }, [
-              _vm._v("Procedimientos "),
+              _vm._v("\n          Procedimientos\n          "),
               _c(
                 "button",
                 {
@@ -71053,120 +70944,108 @@ var render = function() {
       ]),
       _vm._v(" "),
       _c("ModalBody", [
-        _c("div", { staticClass: "my-4" }, [
-          _c("h4", [_vm._v("Datos del Paciente:")]),
-          _vm._v(" "),
-          _c("p", [
-            _vm._v(
-              "\n        Nombre y Apellido: " +
-                _vm._s(_vm.data.persona.nombre) +
-                " " +
-                _vm._s(_vm.data.persona.apellido)
-            ),
-            _c("br"),
-            _vm._v("\n        Cedula: V-" + _vm._s(_vm.data.persona.cedula)),
-            _c("br"),
-            _vm._v("\n        Edad: " + _vm._s(_vm.data.persona.edad)),
-            _c("br")
-          ])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "my-4" }, [
-          _c("h4", [_vm._v("Informacion Diagnostico")]),
-          _vm._v(" "),
-          _c("p", [
-            _vm._v(
-              "\n        Diagnostico N° D_" +
-                _vm._s(_vm.data.diagnostico.id_diagnosticos) +
-                " "
-            ),
-            _c("br"),
-            _vm._v(
-              "\n        Fecha Diagnostico " +
-                _vm._s(_vm.data.diagnostico.fecha_diag) +
-                " "
-            ),
-            _c("br"),
-            _vm._v(
-              "\n        Patologia " +
-                _vm._s(_vm.data.diagnostico.nombre_patologia) +
-                "\n      "
-            )
-          ])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "my-4" }, [
-          _vm.errors.length
-            ? _c("p", [
-                _c("b", [
-                  _vm._v("Por favor, corrija el(los) siguiente(s) error(es):")
-                ]),
-                _vm._v(" "),
-                _c(
-                  "ul",
-                  _vm._l(_vm.errors, function(error) {
-                    return _c("li", [_vm._v(_vm._s(error))])
-                  }),
-                  0
-                )
-              ])
-            : _vm._e()
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "my-4" }, [
-          _c("label", { attrs: { for: "" } }, [
-            _vm._v("Seleccione el Tratamiento")
+        _c("div", { staticClass: "row" }, [
+          _c("div", { staticClass: "col my-4" }, [
+            _c("h4", [_vm._v("Datos del Paciente:")]),
+            _vm._v(" "),
+            _c("p", [
+              _vm._v(
+                "\n          Nombre y Apellido: " +
+                  _vm._s(_vm.data.persona.nombre) +
+                  "\n          " +
+                  _vm._s(_vm.data.persona.apellido)
+              ),
+              _c("br"),
+              _vm._v(
+                "\n          Cedula: V-" + _vm._s(_vm.data.persona.cedula)
+              ),
+              _c("br"),
+              _vm._v("\n          Edad: " + _vm._s(_vm.data.persona.edad)),
+              _c("br")
+            ])
           ]),
           _vm._v(" "),
-          _c(
-            "select",
-            {
-              directives: [
-                {
-                  name: "model",
-                  rawName: "v-model",
-                  value: _vm.nuevoTratamiento.nombre_tratamiento,
-                  expression: "nuevoTratamiento.nombre_tratamiento"
-                }
-              ],
-              staticClass: "form-control",
-              attrs: { name: "" },
-              on: {
-                change: [
-                  function($event) {
-                    var $$selectedVal = Array.prototype.filter
-                      .call($event.target.options, function(o) {
-                        return o.selected
-                      })
-                      .map(function(o) {
-                        var val = "_value" in o ? o._value : o.value
-                        return val
-                      })
-                    _vm.$set(
-                      _vm.nuevoTratamiento,
-                      "nombre_tratamiento",
-                      $event.target.multiple ? $$selectedVal : $$selectedVal[0]
-                    )
-                  },
-                  _vm.getMedicosXEspecialidad
-                ]
-              }
-            },
-            _vm._l(_vm.data.tipos_trat.data, function(tipoTrat) {
-              return _c("option", { key: tipoTrat.id_especialidad }, [
-                _vm._v(
-                  "\n          " +
-                    _vm._s(tipoTrat.tipo_tratamiento) +
-                    "\n        "
-                )
-              ])
-            }),
-            0
-          )
+          _c("div", { staticClass: "col my-4" }, [
+            _c("h4", [_vm._v("Informacion Diagnostico")]),
+            _vm._v(" "),
+            _c("p", [
+              _vm._v(
+                "\n          Diagnostico N°: D_" +
+                  _vm._s(_vm.data.diagnostico.id_diagnosticos) +
+                  " "
+              ),
+              _c("br"),
+              _vm._v(
+                "\n          Fecha Diagnostico: " +
+                  _vm._s(_vm.data.diagnostico.fecha_diag) +
+                  " "
+              ),
+              _c("br"),
+              _vm._v(
+                "\n          Patologia: " +
+                  _vm._s(_vm.data.diagnostico.nombre_patologia) +
+                  "\n        "
+              )
+            ])
+          ])
         ]),
         _vm._v(" "),
-        _c("div", { staticClass: "row mt-4" }, [
-          _c("div", { staticClass: "col-sm-9" }, [
+        _c("div", { staticClass: "row" }, [
+          _c("div", { staticClass: "col my-4" }, [
+            _c("label", { attrs: { for: "" } }, [
+              _vm._v("Seleccione el Tratamiento")
+            ]),
+            _vm._v(" "),
+            _c(
+              "select",
+              {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.nuevoTratamiento.nombre_tratamiento,
+                    expression: "nuevoTratamiento.nombre_tratamiento"
+                  }
+                ],
+                staticClass: "form-control",
+                attrs: { name: "" },
+                on: {
+                  change: [
+                    function($event) {
+                      var $$selectedVal = Array.prototype.filter
+                        .call($event.target.options, function(o) {
+                          return o.selected
+                        })
+                        .map(function(o) {
+                          var val = "_value" in o ? o._value : o.value
+                          return val
+                        })
+                      _vm.$set(
+                        _vm.nuevoTratamiento,
+                        "nombre_tratamiento",
+                        $event.target.multiple
+                          ? $$selectedVal
+                          : $$selectedVal[0]
+                      )
+                    },
+                    _vm.getMedicosXEspecialidad
+                  ]
+                }
+              },
+              _vm._l(_vm.data.tipos_trat.data, function(tipoTrat) {
+                return _c("option", { key: tipoTrat.id_especialidad }, [
+                  _vm._v(
+                    "\n            " +
+                      _vm._s(tipoTrat.tipo_tratamiento) +
+                      "\n          "
+                  )
+                ])
+              }),
+              0
+            )
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col my-4" }, [
             _c("label", [_vm._v("Medico Encargado")]),
             _vm._v(" "),
             _c(
@@ -71282,7 +71161,7 @@ var render = function() {
                 }
               ],
               staticClass: "form-control",
-              attrs: { cols: "30", rows: "10" },
+              attrs: { cols: "30", rows: "5" },
               domProps: { value: _vm.nuevoTratamiento.objetivo },
               on: {
                 input: function($event) {
@@ -71316,7 +71195,7 @@ var render = function() {
                 }
               ],
               staticClass: "form-control",
-              attrs: { cols: "30", rows: "10" },
+              attrs: { cols: "30", rows: "5" },
               domProps: { value: _vm.nuevoTratamiento.riesgos },
               on: {
                 input: function($event) {
@@ -71394,169 +71273,134 @@ var render = function() {
       _c("ModalBody", [
         _c("div", { staticClass: "row" }, [
           _c("div", { staticClass: "col" }, [
-            _c(
-              "div",
-              {
-                staticClass: "card bluegradient",
-                staticStyle: { width: "18rem" }
-              },
-              [
-                _c("div", { staticClass: "card-body" }, [
-                  _c("h5", { staticClass: "card-title" }, [
-                    _vm._v("Datos del Paciente")
-                  ]),
-                  _vm._v(" "),
-                  _c("h6", [_vm._v("Nombres y Apellidos:")]),
-                  _vm._v(" "),
-                  _c("p", [
-                    _vm._v(
-                      _vm._s(_vm.data.persona.nombre) +
-                        " " +
-                        _vm._s(_vm.data.persona.apellido)
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _c("h6", [_vm._v("Cedula:")]),
-                  _vm._v(" "),
-                  _c("p", [_vm._v(_vm._s(_vm.data.persona.cedula))]),
-                  _vm._v(" "),
-                  _c("h6", [_vm._v("Genero:")]),
-                  _vm._v(" "),
-                  _c("p", [_vm._v(_vm._s(_vm.data.persona.genero))]),
-                  _vm._v(" "),
-                  _c("h6", [_vm._v("Edad:")]),
-                  _vm._v(" "),
-                  _c("p", [_vm._v(_vm._s(_vm.data.persona.edad))])
-                ])
-              ]
-            )
+            _c("div", { staticClass: "card bluegradiente" }, [
+              _c("div", { staticClass: "card-body" }, [
+                _c("h5", { staticClass: "card-title" }, [
+                  _vm._v("Datos del Paciente")
+                ]),
+                _vm._v(" "),
+                _c("h6", [_vm._v("Nombres y Apellidos:")]),
+                _vm._v(" "),
+                _c("p", [
+                  _vm._v(
+                    _vm._s(_vm.data.persona.nombre) +
+                      " " +
+                      _vm._s(_vm.data.persona.apellido)
+                  )
+                ]),
+                _vm._v(" "),
+                _c("h6", [_vm._v("Cedula:")]),
+                _vm._v(" "),
+                _c("p", [_vm._v(_vm._s(_vm.data.persona.cedula))]),
+                _vm._v(" "),
+                _c("h6", [_vm._v("Genero:")]),
+                _vm._v(" "),
+                _c("p", [_vm._v(_vm._s(_vm.data.persona.genero))]),
+                _vm._v(" "),
+                _c("h6", [_vm._v("Edad:")]),
+                _vm._v(" "),
+                _c("p", [_vm._v(_vm._s(_vm.data.persona.edad))])
+              ])
+            ])
           ]),
           _vm._v(" "),
           _c("div", { staticClass: "col" }, [
-            _c(
-              "div",
-              {
-                staticClass: "card greengradient",
-                staticStyle: { width: "18rem" }
-              },
-              [
-                _c(
-                  "div",
-                  { staticClass: "card-body" },
-                  [
-                    _c("h5", { staticClass: "card-title" }, [
-                      _vm._v("Fecha de la Consulta")
-                    ]),
-                    _vm._v(" "),
-                    _c("p", { staticClass: "card-text" }, [
-                      _vm._v(_vm._s(_vm.data.consulta[0].fecha_consulta))
-                    ]),
-                    _vm._v(" "),
-                    _c("h5", { staticClass: "card-title" }, [
-                      _vm._v("Especialidad de la consulta")
-                    ]),
-                    _vm._v(" "),
-                    _c("p", { staticClass: "card-text" }, [
-                      _vm._v(
-                        "\n              " +
-                          _vm._s(_vm.data.consulta[0].nombre_especialidad) +
-                          "\n            "
-                      )
-                    ]),
-                    _vm._v(" "),
-                    _c("h5", { staticClass: "card-title" }, [
-                      _vm._v("Sintomas del Paciente")
-                    ]),
-                    _vm._v(" "),
-                    _vm._l(_vm.getSintomas, function(sintoma) {
-                      return _c("p", { staticClass: "card-text" }, [
-                        _vm._v(
-                          "\n              " +
-                            _vm._s(sintoma) +
-                            "\n            "
-                        )
-                      ])
-                    })
-                  ],
-                  2
-                )
-              ]
-            )
+            _c("div", { staticClass: "card purplegradient" }, [
+              _c(
+                "div",
+                { staticClass: "card-body" },
+                [
+                  _c("h5", { staticClass: "card-title" }, [
+                    _vm._v("Fecha de la Consulta")
+                  ]),
+                  _vm._v(" "),
+                  _c("p", { staticClass: "card-text" }, [
+                    _vm._v(_vm._s(_vm.data.consulta[0].fecha_consulta))
+                  ]),
+                  _vm._v(" "),
+                  _c("h5", { staticClass: "card-title" }, [
+                    _vm._v("Especialidad de la consulta")
+                  ]),
+                  _vm._v(" "),
+                  _c("p", { staticClass: "card-text" }, [
+                    _vm._v(
+                      "\n              " +
+                        _vm._s(_vm.data.consulta[0].nombre_especialidad) +
+                        "\n            "
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("h5", { staticClass: "card-title" }, [
+                    _c("strong", [_vm._v("Sintomas del Paciente")])
+                  ]),
+                  _vm._v(" "),
+                  _vm._l(_vm.getSintomas, function(sintoma) {
+                    return _c("p", [
+                      _c("strong", [_vm._v("Sintoma:")]),
+                      _vm._v(" " + _vm._s(sintoma) + "\n            ")
+                    ])
+                  })
+                ],
+                2
+              )
+            ])
           ])
         ]),
         _vm._v(" "),
         _c("div", { staticClass: "row" }, [
           _c("div", { staticClass: "col" }, [
-            _c(
-              "div",
-              {
-                staticClass: "card yellowgradient",
-                staticStyle: { width: "18rem" }
-              },
-              [
-                _c(
-                  "div",
-                  { staticClass: "card-body" },
-                  [
-                    _c("h5", { staticClass: "card-title" }, [
-                      _vm._v("Habitos del Paciente")
-                    ]),
-                    _vm._v(" "),
-                    _vm._l(_vm.getHabitos, function(habito) {
-                      return _c(
-                        "p",
-                        { key: habito.id_habito, staticClass: "card-text" },
-                        [
-                          _vm._v(
-                            "\n              " +
-                              _vm._s(habito) +
-                              "\n            "
-                          )
-                        ]
+            _c("div", { staticClass: "card purplegradient" }, [
+              _c(
+                "div",
+                { staticClass: "card-body" },
+                [
+                  _c("h5", { staticClass: "card-title" }, [
+                    _c("strong", [_vm._v("Habitos del Paciente")])
+                  ]),
+                  _vm._v(" "),
+                  _vm._l(_vm.getHabitos, function(habito) {
+                    return _c("p", { key: habito.id_habito }, [
+                      _vm._v(
+                        "\n              Habito: " +
+                          _vm._s(habito) +
+                          "\n            "
                       )
-                    })
-                  ],
-                  2
-                )
-              ]
-            )
+                    ])
+                  })
+                ],
+                2
+              )
+            ])
           ]),
           _vm._v(" "),
           _c("div", { staticClass: "col" }, [
-            _c(
-              "div",
-              {
-                staticClass: "card redgradient",
-                staticStyle: { width: "18rem" }
-              },
-              [
-                _c(
-                  "div",
-                  { staticClass: "card-body" },
-                  [
-                    _c("h5", { staticClass: "card-title" }, [
-                      _vm._v("Procedimientos en la Consulta")
-                    ]),
-                    _vm._v(" "),
-                    _vm._l(_vm.getProcedimiento, function(
-                      procedimiento,
-                      index
-                    ) {
-                      return _c("p", { key: index, staticClass: "card-text" }, [
-                        _vm._v(
-                          "\n              " +
-                            _vm._s(procedimiento) +
-                            " " +
-                            _vm._s(_vm.data.consulta[index].resultado) +
-                            "\n            "
-                        )
-                      ])
-                    })
-                  ],
-                  2
-                )
-              ]
-            )
+            _c("div", { staticClass: "card bluegradiente" }, [
+              _c(
+                "div",
+                { staticClass: "card-body" },
+                [
+                  _c("h5", { staticClass: "card-title" }, [
+                    _vm._v("Procedimientos en la Consulta")
+                  ]),
+                  _vm._v(" "),
+                  _vm._l(_vm.getProcedimiento, function(procedimiento, index) {
+                    return _c("p", { key: index, staticClass: "card-text" }, [
+                      _c("strong", [_vm._v("Procedimiento: ")]),
+                      _vm._v(" " + _vm._s(procedimiento) + " "),
+                      _c("br"),
+                      _vm._v(" "),
+                      _c("strong", [_vm._v("Resultado: ")]),
+                      _vm._v(
+                        " " +
+                          _vm._s(_vm.data.consulta[index].resultado) +
+                          "\n            "
+                      )
+                    ])
+                  })
+                ],
+                2
+              )
+            ])
           ])
         ])
       ]),
@@ -71573,6 +71417,21 @@ var render = function() {
             }
           },
           [_vm._v("\n      Cerrar\n    ")]
+        ),
+        _vm._v(" "),
+        _c(
+          "button",
+          { staticClass: "btn btn-warning", on: { click: _vm.edit } },
+          [_vm._v("Editar")]
+        ),
+        _vm._v(" "),
+        _c(
+          "button",
+          {
+            staticClass: "btn btn-success",
+            attrs: { onclick: "window.print();return false;", type: "button" }
+          },
+          [_vm._v("\n      Imprimir Consulta\n    ")]
         )
       ])
     ],
@@ -71642,7 +71501,7 @@ var render = function() {
             _vm._v(" "),
             _c("p", [
               _vm._v(
-                "\n        Consulta N°" +
+                "\n        Consulta N°: C_" +
                   _vm._s(_vm.data.consulta[0].id_consulta) +
                   " "
               ),
@@ -71705,6 +71564,21 @@ var render = function() {
             }
           },
           [_vm._v("\n      Cerrar\n    ")]
+        ),
+        _vm._v(" "),
+        _c(
+          "button",
+          { staticClass: "btn btn-warning", on: { click: _vm.edit } },
+          [_vm._v("\n      Editar Diagnostico\n    ")]
+        ),
+        _vm._v(" "),
+        _c(
+          "button",
+          {
+            staticClass: "btn btn-success",
+            attrs: { onclick: "window.print();return false;", type: "button" }
+          },
+          [_vm._v("\n      Imprimir Diagnostico\n    ")]
         )
       ])
     ],
@@ -71748,51 +71622,55 @@ var render = function() {
       ]),
       _vm._v(" "),
       _c("ModalBody", [
-        _c("div", { staticClass: "my-4" }, [
-          _c("h4", [_vm._v("Informacion Basica del Paciente:")]),
+        _c("div", { staticClass: "row" }, [
+          _c("div", { staticClass: "col my-4" }, [
+            _c("h4", [_vm._v("Informacion Basica del Paciente:")]),
+            _vm._v(" "),
+            _c("p", [
+              _vm._v(
+                "\n          Nombre y Apellido: " +
+                  _vm._s(_vm.data.persona.nombre) +
+                  "\n          " +
+                  _vm._s(_vm.data.persona.apellido)
+              ),
+              _c("br"),
+              _vm._v(
+                "\n          Cedula: V-" + _vm._s(_vm.data.persona.cedula)
+              ),
+              _c("br"),
+              _vm._v("\n          Edad: " + _vm._s(_vm.data.persona.edad)),
+              _c("br")
+            ])
+          ]),
           _vm._v(" "),
-          _c("p", [
-            _vm._v(
-              "\n        Nombre y Apellido: " +
-                _vm._s(_vm.data.persona.nombre) +
-                " " +
-                _vm._s(_vm.data.persona.apellido)
-            ),
-            _c("br"),
-            _vm._v("\n        Cedula: V-" + _vm._s(_vm.data.persona.cedula)),
-            _c("br"),
-            _vm._v("\n        Edad: " + _vm._s(_vm.data.persona.edad)),
-            _c("br")
+          _c("div", { staticClass: "col my-4" }, [
+            _c("h4", [_vm._v("Detalles Tratamiento")]),
+            _vm._v(" "),
+            _c("p", [
+              _vm._v(
+                "\n          Tratamiento N°: T_" +
+                  _vm._s(_vm.data.tratamiento.id_tratamientos) +
+                  " "
+              ),
+              _c("br"),
+              _vm._v(
+                "\n          Tipo de Tratamiento: " +
+                  _vm._s(_vm.data.tratamiento.tipo_tratamiento) +
+                  " "
+              ),
+              _c("br"),
+              _vm._v(
+                "\n          Medico Encargado: " +
+                  _vm._s(_vm.data.tratamiento.mednombre) +
+                  "\n          " +
+                  _vm._s(_vm.data.tratamiento.medapellido) +
+                  "\n        "
+              )
+            ])
           ])
         ]),
         _vm._v(" "),
-        _c("div", { staticClass: "my-4" }, [
-          _c("h4", [_vm._v("Detalles Tratamiento")]),
-          _vm._v(" "),
-          _c("p", [
-            _vm._v(
-              "\n        Tratamiento N°: T_" +
-                _vm._s(_vm.data.tratamiento.id_tratamientos) +
-                " "
-            ),
-            _c("br"),
-            _vm._v(
-              "\n        Tipo de Tratamiento: " +
-                _vm._s(_vm.data.tratamiento.tipo_tratamiento) +
-                " "
-            ),
-            _c("br"),
-            _vm._v(
-              "\n        Medico Encargado: " +
-                _vm._s(_vm.data.tratamiento.mednombre) +
-                " " +
-                _vm._s(_vm.data.tratamiento.medapellido) +
-                "\n      "
-            )
-          ])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "card my-4 lb-gradient" }, [
+        _c("div", { staticClass: "card my-4 purplegradient" }, [
           _c("div", { staticClass: "card-body" }, [
             _c("h4", { staticClass: "card-title" }, [
               _vm._v("Recipe N°: R_" + _vm._s(_vm.data.recipe.id_recipe))
@@ -71814,11 +71692,19 @@ var render = function() {
                   _vm._l(_vm.data.medicamentos.data, function(medicamento) {
                     return _c("p", [
                       _c("strong", [_vm._v("Medicamento:")]),
-                      _vm._v(" " + _vm._s(medicamento.medicamento) + " "),
+                      _vm._v(
+                        " " +
+                          _vm._s(medicamento.medicamento) +
+                          "\n              "
+                      ),
                       _c("br"),
                       _vm._v(" "),
                       _c("strong", [_vm._v("Tipo Medicamento:")]),
-                      _vm._v(" " + _vm._s(medicamento.tipo_medicamento) + " "),
+                      _vm._v(
+                        "\n              " +
+                          _vm._s(medicamento.tipo_medicamento) +
+                          " "
+                      ),
                       _c("br"),
                       _vm._v(" "),
                       _c("strong", [_vm._v("Indicaciones:")]),
@@ -71849,6 +71735,21 @@ var render = function() {
             }
           },
           [_vm._v("\n      Cerrar\n    ")]
+        ),
+        _vm._v(" "),
+        _c(
+          "button",
+          { staticClass: "btn btn-warning", on: { click: _vm.edit } },
+          [_vm._v("Editar Recipe")]
+        ),
+        _vm._v(" "),
+        _c(
+          "button",
+          {
+            staticClass: "btn btn-success",
+            attrs: { onclick: "window.print();return false;", type: "button" }
+          },
+          [_vm._v("\n      Imprimir Recipe\n    ")]
         )
       ])
     ],
@@ -71892,67 +71793,73 @@ var render = function() {
       ]),
       _vm._v(" "),
       _c("ModalBody", [
-        _c("div", { staticClass: "my-4" }, [
-          _c("h4", [_vm._v("Informacion Basica del Paciente:")]),
+        _c("div", { staticClass: "row" }, [
+          _c("div", { staticClass: "col my-4" }, [
+            _c("h4", [_vm._v("Informacion Basica del Paciente:")]),
+            _vm._v(" "),
+            _c("p", [
+              _vm._v(
+                "\n          Nombre y Apellido: " +
+                  _vm._s(_vm.data.persona.nombre) +
+                  "\n          " +
+                  _vm._s(_vm.data.persona.apellido)
+              ),
+              _c("br"),
+              _vm._v(
+                "\n          Cedula: V-" + _vm._s(_vm.data.persona.cedula)
+              ),
+              _c("br"),
+              _vm._v("\n          Edad: " + _vm._s(_vm.data.persona.edad)),
+              _c("br")
+            ])
+          ]),
           _vm._v(" "),
-          _c("p", [
-            _vm._v(
-              "\n        Nombre y Apellido: " +
-                _vm._s(_vm.data.persona.nombre) +
-                " " +
-                _vm._s(_vm.data.persona.apellido)
-            ),
-            _c("br"),
-            _vm._v("\n        Cedula: V-" + _vm._s(_vm.data.persona.cedula)),
-            _c("br"),
-            _vm._v("\n        Edad: " + _vm._s(_vm.data.persona.edad)),
-            _c("br")
+          _c("div", { staticClass: "col my-4" }, [
+            _c("h4", [_vm._v("Detalles del Tratamiento")]),
+            _vm._v(" "),
+            _c("p", [
+              _vm._v(
+                "\n          Tratamiento N°: T_" +
+                  _vm._s(_vm.data.tratamiento.id_tratamientos) +
+                  " "
+              ),
+              _c("br"),
+              _vm._v(
+                "\n          Tipo de Tratamiento: " +
+                  _vm._s(_vm.data.tratamiento.tipo_tratamiento) +
+                  " "
+              ),
+              _c("br"),
+              _vm._v(
+                "\n          Medico Encargado: " +
+                  _vm._s(_vm.data.tratamiento.mednombre) +
+                  "\n          " +
+                  _vm._s(_vm.data.tratamiento.medapellido) +
+                  " "
+              ),
+              _c("br"),
+              _vm._v(
+                "\n          Fecha Inicio Tratamiento: " +
+                  _vm._s(_vm.data.tratamiento.fecha_inicio) +
+                  " "
+              ),
+              _c("br"),
+              _vm._v(
+                "\n          Fecha Fin Tratamiento: " +
+                  _vm._s(_vm.data.tratamiento.fecha_fin) +
+                  " "
+              ),
+              _c("br")
+            ])
           ])
         ]),
         _vm._v(" "),
-        _c("div", { staticClass: "my-4" }, [
-          _c("h4", [_vm._v("Detalles Tratamiento")]),
-          _vm._v(" "),
-          _c("p", [
-            _vm._v(
-              "\n        Tratamiento N°: T_" +
-                _vm._s(_vm.data.tratamiento.id_tratamientos) +
-                " "
-            ),
-            _c("br"),
-            _vm._v(
-              "\n        Tipo de Tratamiento: " +
-                _vm._s(_vm.data.tratamiento.tipo_tratamiento) +
-                " "
-            ),
-            _c("br"),
-            _vm._v(
-              "\n        Medico Encargado: " +
-                _vm._s(_vm.data.tratamiento.mednombre) +
-                "\n        " +
-                _vm._s(_vm.data.tratamiento.medapellido) +
-                " "
-            ),
-            _c("br"),
-            _vm._v(
-              "\n        Fecha Inicio Tratamiento: " +
-                _vm._s(_vm.data.tratamiento.fecha_inicio) +
-                " "
-            ),
-            _c("br"),
-            _vm._v(
-              "\n        Fecha Fin Tratamiento: " +
-                _vm._s(_vm.data.tratamiento.fecha_fin) +
-                " "
-            ),
-            _c("br")
-          ])
+        _c("h5", { staticClass: "center" }, [
+          _vm._v("Objetivos y riesgos del Tratamiento")
         ]),
-        _vm._v(" "),
-        _c("h5", [_vm._v("Objetivos y riesgos del Tratamiento")]),
         _vm._v(" "),
         _c("div", { staticClass: "row" }, [
-          _c("div", { staticClass: "col m-2 card lb-gradient" }, [
+          _c("div", { staticClass: "col m-2 card bluegradiente" }, [
             _c("div", { staticClass: "card-body" }, [
               _c("h5", { staticClass: "card-title" }, [_vm._v("Objetivos")]),
               _vm._v(" "),
@@ -71962,7 +71869,7 @@ var render = function() {
             ])
           ]),
           _vm._v(" "),
-          _c("div", { staticClass: "col m-2 card lb-gradient" }, [
+          _c("div", { staticClass: "col m-2 card bluegradiente" }, [
             _c("div", { staticClass: "card-body" }, [
               _c("h5", { staticClass: "card-title" }, [_vm._v("Riesgos")]),
               _vm._v(" "),
@@ -71986,6 +71893,21 @@ var render = function() {
             }
           },
           [_vm._v("\n      Cerrar\n    ")]
+        ),
+        _vm._v(" "),
+        _c(
+          "button",
+          { staticClass: "btn btn-warning", on: { click: _vm.edit } },
+          [_vm._v("Editar Tratamiento")]
+        ),
+        _vm._v(" "),
+        _c(
+          "button",
+          {
+            staticClass: "btn btn-success",
+            attrs: { onclick: "window.print();return false;", type: "button" }
+          },
+          [_vm._v("\n      Imprimir Tratamiento\n    ")]
         )
       ])
     ],
@@ -72240,6 +72162,28 @@ var render = function() {
                   _vm._v(" "),
                   _c("h6", { staticClass: "text-muted f-w-400" }, [
                     _vm._v(_vm._s(_vm.data.edad))
+                  ])
+                ])
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "row" }, [
+                _c("div", { staticClass: "col-sm-6" }, [
+                  _c("p", { staticClass: "m-b-10 f-w-600" }, [
+                    _vm._v("Dirección")
+                  ]),
+                  _vm._v(" "),
+                  _c("h6", { staticClass: "text-muted f-w-400" }, [
+                    _vm._v(_vm._s(_vm.data.direccion))
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "col-sm-6" }, [
+                  _c("p", { staticClass: "m-b-10 f-w-600" }, [
+                    _vm._v("Numero Telefonico")
+                  ]),
+                  _vm._v(" "),
+                  _c("h6", { staticClass: "text-muted f-w-400" }, [
+                    _vm._v(_vm._s(_vm.data.telefono))
                   ])
                 ])
               ])
